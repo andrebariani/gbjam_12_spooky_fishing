@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="GBJAM_12"
+run/main_scene="res://scenes/test_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/test-sprite.png"
 
 [display]
 
 window/size/viewport_width=160
 window/size/viewport_height=144
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [rendering]
