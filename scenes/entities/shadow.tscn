@@ -6,7 +6,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l13h2"]
 
 [node name="Shadow" type="CharacterBody2D"]
-position = Vector2(54, 103)
 motion_mode = 1
 script = ExtResource("1_amnuf")
 fish = ExtResource("2_iguua")
