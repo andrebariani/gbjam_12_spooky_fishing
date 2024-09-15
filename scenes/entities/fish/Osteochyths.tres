@@ -4,10 +4,13 @@
 
 [resource]
 script = ExtResource("1_u5bmx")
-id = &""
-name = ""
-description = ""
-number = 8.2
-shadow_size = "Medium"
+id = null
+name = null
+description = null
+is_moochable = null
+behavior = null
+size_centimeters = null
+shadow_size = null
 weather = "None"
-time_range = ""
+is_timed_only = null
+time_window = null

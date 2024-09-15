@@ -3,26 +3,93 @@ class_name Shadow
 
 @export var fish: FishData
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@onready var sprite = $Line2D
+@onready var roamTimer = $RoamingTimer
+@onready var detectArea = $DetectArea
+@onready var lineOfSight = $LineOfSight
 
+const SPEED = 50.0
+const ROTATION_SPEED = 1.2
+const FRICTION = 50
+const ACCEL = 50
+
+#var shadow_size_transform = {
+	#FishData.SHADOW_SIZE.SMALL: {
+		#position: Vector2(0,0),
+		#scale: Vector2(1,1)
+	#},
+	#FishData.SHADOW_SIZE.MEDIUM: {
+		#position: Vector2(0,0),
+		#scale: Vector2(2,2)
+	#},
+#}
+
+var state = IDLE
+enum {
+	IDLE,
+	ROAM,
+	CHASE,
+	BITE
+}
+
+var roaming_range = 8
+var start_pos = self.global_position
+var target_pos = self.global_position
+
+func update_target_position():
+	var random_pos_x = randf_range(-roaming_range, roaming_range)
+	var random_pos_y = randf_range(-roaming_range, roaming_range)
+	var new_target_pos = Vector2(random_pos_x, random_pos_y)
+	target_pos = start_pos + new_target_pos
+
+func _ready():
+	#sprite.position = shadow_size_transform[fish.shadow_size].position
+	#sprite.scale = shadow_size_transform[fish.shadow_size].scale
+	
+	detectArea.init(self)
+	
+	update_target_position()
 
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	lineOfSight.force_raycast_update()
+	
+	match state:
+		IDLE:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			seek_bait()
+			if roamTimer.is_stopped():
+				state = ROAM
+		ROAM:
+			seek_bait()
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+			var dir = global_position.direction_to(target_pos)
+			velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
+			look_at(target_pos)
+			
+			if global_position.distance_to(target_pos) <= 2:
+				print_debug('idle')
+				roamTimer.start(randi_range(1, 5))
+				state = IDLE
+		CHASE:
+			var bait = detectArea.bait
+			if bait != null:
+				var dir = global_position.direction_to(bait.global_position)
+				velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
+				#rotation += dir * ROTATION_SPEED * delta
+			else:
+				state = IDLE
+				
+		BITE:
+			call_deferred("queue_free")
+			
 	move_and_slide()
+	
+func seek_bait():
+	if detectArea.can_see_bait():
+		state = CHASE
+
+
+func _on_roaming_timer_timeout():
+	update_target_position()
+	print_debug('go somewhere', target_pos)

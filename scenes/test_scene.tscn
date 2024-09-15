@@ -83,6 +83,7 @@ autoplay = "new_animation"
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 
 [node name="Shadow" parent="." instance=ExtResource("4_xpygu")]
+position = Vector2(34, 83)
 
 [node name="time" type="Label" parent="."]
 offset_left = 104.0
