@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bplpfbcxas5l1"]
+[gd_scene load_steps=11 format=3 uid="uid://bplpfbcxas5l1"]
 
 [ext_resource type="Shader" path="res://scenes/test_scene.gdshader" id="1_1ddho"]
 [ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="1_phtu1"]
 [ext_resource type="Texture2D" uid="uid://cusnwg0quwr5s" path="res://assets/Sprite-0003.png" id="3_7istp"]
+[ext_resource type="PackedScene" uid="uid://bfoabmylt4ar5" path="res://scenes/entities/shadow.tscn" id="4_xpygu"]
+[ext_resource type="Script" path="res://scenes/ui/test_time.gd" id="6_npblf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n752"]
 shader = ExtResource("1_1ddho")
@@ -18,6 +20,21 @@ shader_parameter/replace_3 = Color(1, 0.905882, 0.521569, 1)
 shader_parameter/replace_4 = null
 
 [sub_resource type="TileSet" id="TileSet_sr3f7"]
+
+[sub_resource type="Animation" id="Animation_51e4s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(9, -1, 11, 0, 13, 0, 17, 0, 23, -1, 27, 0, 31, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_25gxo"]
 resource_name = "new_animation"
@@ -35,21 +52,6 @@ tracks/0/keys = {
 "values": [PackedVector2Array(9, -1, 11, 0, 13, 0, 17, 0, 23, -1, 27, 0, 31, 0), PackedVector2Array(9, -1, 11, 0, 13, 0, 17, 0, 23, -1, 27, 0, 31, 4), PackedVector2Array(9, -1, 11, 0, 13, 0, 17, 0, 23, -1, 27, 0, 31, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_51e4s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:points")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(9, -1, 11, 0, 13, 0, 17, 0, 23, -1, 27, 0, 31, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a1qr5"]
 _data = {
 "RESET": SubResource("Animation_51e4s"),
@@ -60,7 +62,7 @@ _data = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_7n752")
-position = Vector2(81, 68)
+position = Vector2(134, 70)
 texture = ExtResource("1_phtu1")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -79,3 +81,13 @@ libraries = {
 autoplay = "new_animation"
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
+
+[node name="Shadow" parent="." instance=ExtResource("4_xpygu")]
+
+[node name="time" type="Label" parent="."]
+offset_left = 104.0
+offset_top = 120.0
+offset_right = 159.0
+offset_bottom = 143.0
+text = "asdasd"
+script = ExtResource("6_npblf")

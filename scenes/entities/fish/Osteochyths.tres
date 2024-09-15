@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://bts3u0vfq5bhl"]
+
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_u5bmx"]
+
+[resource]
+script = ExtResource("1_u5bmx")
+id = &""
+name = ""
+description = ""
+number = 8.2
+shadow_size = "Medium"
+weather = "None"
+time_range = ""

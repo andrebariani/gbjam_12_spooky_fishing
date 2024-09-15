@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfoabmylt4ar5"]
+
+[ext_resource type="Script" path="res://scenes/entities/shadow.gd" id="1_amnuf"]
+[ext_resource type="Resource" uid="uid://bts3u0vfq5bhl" path="res://scenes/entities/fish/Osteochyths.tres" id="2_iguua"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l13h2"]
+
+[node name="Shadow" type="CharacterBody2D"]
+position = Vector2(54, 103)
+motion_mode = 1
+script = ExtResource("1_amnuf")
+fish = ExtResource("2_iguua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_l13h2")

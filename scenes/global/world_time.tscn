@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://wtxk6e6k3b1b"]
+
+[ext_resource type="Script" path="res://scenes/global/world_time.gd" id="1_l2kjv"]
+
+[node name="WorldTime" type="Node"]
+script = ExtResource("1_l2kjv")
+minutes = 30
+hours = 16
