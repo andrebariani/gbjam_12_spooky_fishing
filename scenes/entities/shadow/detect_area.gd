@@ -11,7 +11,7 @@ func can_see_bait():
 		var ray: RayCast2D = shadow.lineOfSight
 		
 		var bait_pos = bait.global_position
-		var shadow_pos = shadow.global_position
+		#var shadow_pos = shadow.global_position
 		
 		ray.target_position = bait_pos
 		
@@ -19,8 +19,8 @@ func can_see_bait():
 			return true
 	return false
 
-func _on_body_entered(body):
-	bait = body
+func _on_body_entered(_body):
+	bait = _body
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	bait = null

@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://blk5upqrse004"]
+
+[ext_resource type="Script" path="res://scenes/entities/player/player_boat.gd" id="1_0tnni"]
+[ext_resource type="Texture2D" uid="uid://b5n28ahruvs4w" path="res://icon.svg" id="2_btpqh"]
+[ext_resource type="Script" path="res://scenes/entities/player/water_trail.gd" id="3_hyxur"]
+[ext_resource type="Texture2D" uid="uid://c4sb62hcu6rv7" path="res://assets/arrow.png" id="3_nukac"]
+[ext_resource type="Script" path="res://scenes/entities/state_machine.gd" id="3_pfqpi"]
+[ext_resource type="Texture2D" uid="uid://l4i2pbw25eqp" path="res://assets/ripple.png" id="3_xnljd"]
+[ext_resource type="Script" path="res://scenes/entities/player/states/idle.gd" id="4_cnpij"]
+[ext_resource type="Script" path="res://scenes/entities/player/states/move.gd" id="4_xfj8a"]
+[ext_resource type="Script" path="res://scenes/entities/player/states/cast.gd" id="8_ef00f"]
+[ext_resource type="Script" path="res://scenes/entities/player/tackle.gd" id="9_q0qfy"]
+[ext_resource type="Script" path="res://scenes/entities/player/states/fishing.gd" id="10_l23x7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmrwm"]
+size = Vector2(9, 11)
+
+[sub_resource type="Curve" id="Curve_log4j"]
+_data = [Vector2(0, 1), 0.0, -0.505495, 0, 0, Vector2(1, 0.494505), -0.505495, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ink2m"]
+size = Vector2(3, 3)
+
+[node name="PlayerBoat" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_0tnni")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(-2.86102e-06, 2.86102e-06)
+scale = Vector2(0.0781251, 0.09375)
+texture = ExtResource("2_btpqh")
+
+[node name="arrow" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_nukac")
+centered = false
+offset = Vector2(8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gmrwm")
+
+[node name="WaterTrail" type="Line2D" parent="."]
+show_behind_parent = true
+top_level = true
+position = Vector2(1, 0)
+width = 32.0
+width_curve = SubResource("Curve_log4j")
+texture = ExtResource("3_xnljd")
+texture_mode = 1
+script = ExtResource("3_hyxur")
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("3_pfqpi")
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("4_cnpij")
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource("4_xfj8a")
+
+[node name="Cast" type="Node" parent="States"]
+script = ExtResource("8_ef00f")
+
+[node name="Fishing" type="Node" parent="States"]
+script = ExtResource("10_l23x7")
+
+[node name="Debug" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="cast" type="Label" parent="Debug"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Tackle" type="CharacterBody2D" parent="."]
+script = ExtResource("9_q0qfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tackle"]
+shape = SubResource("RectangleShape2D_ink2m")
+disabled = true

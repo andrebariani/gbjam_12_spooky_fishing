@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfoabmylt4ar5"]
+[gd_scene load_steps=9 format=3 uid="uid://bfoabmylt4ar5"]
 
-[ext_resource type="Script" path="res://scenes/entities/shadow.gd" id="1_amnuf"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/shadow.gd" id="1_amnuf"]
 [ext_resource type="Resource" uid="uid://bts3u0vfq5bhl" path="res://scenes/entities/fish/Osteochyths.tres" id="2_iguua"]
 [ext_resource type="Texture2D" uid="uid://cusnwg0quwr5s" path="res://assets/Sprite-0003.png" id="3_t6ea0"]
-[ext_resource type="Script" path="res://scenes/entities/detect_area.gd" id="4_c6y7k"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/detect_area.gd" id="4_c6y7k"]
+[ext_resource type="Script" path="res://scenes/entities/state_machine.gd" id="5_7ytth"]
+[ext_resource type="Script" path="res://scenes/entities/state.gd" id="6_hiwmx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbx01"]
 radius = 7.0
@@ -42,6 +44,12 @@ script = ExtResource("4_c6y7k")
 [node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
 position = Vector2(-45, 0)
 shape = SubResource("CapsuleShape2D_yv2gw")
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("5_7ytth")
+
+[node name="state" type="Node" parent="States"]
+script = ExtResource("6_hiwmx")
 
 [connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]
 [connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_body_entered"]

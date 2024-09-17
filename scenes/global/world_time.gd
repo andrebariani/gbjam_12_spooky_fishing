@@ -17,10 +17,10 @@ func _run(delta):
 	var delta_int_secs = delta_time
 	delta_time -= delta_int_secs
 	
-	seconds += delta_int_secs
-	minutes += seconds / 60
-	hours += minutes / 60
-	days += hours / 24
+	seconds += int(delta_int_secs)
+	minutes += int(seconds / floor(60))
+	hours += int(minutes / floor(60))
+	days += int(hours / floor(24))
 	
 	seconds = seconds % 60
 	minutes = minutes % 60
