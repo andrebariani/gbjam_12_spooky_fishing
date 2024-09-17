@@ -1,6 +1,7 @@
 extends State
 
 @onready var tween: Tween
+var cast_dir := Vector2.ZERO
 
 func begin():
 	var e: PlayerBoat = entity
@@ -23,12 +24,13 @@ func run(delta):
 	var e: PlayerBoat = entity
 	
 	var button_pressed = e.get_input(e.input_start, 'pressed')
-	var button_just_pressed = e.get_input(e.input_start, 'just_pressed')
+	#var button_just_pressed = e.get_input(e.input_start, 'just_pressed')
 	var button_released = e.get_input(e.input_start, 'just_released')
 	
 	e.velocity = e.velocity.move_toward(Vector2.ZERO, e.FRICTION * delta)
 	
 	if e.inputs.dirv != Vector2.ZERO and not button_pressed:
+		cast_dir = e.inputs.dirv.normalized()
 		var input_angle = e.inputs.dirv.normalized().angle()
 		e.arrow_sprite.rotation = lerp(e.arrow_sprite.rotation, input_angle, e.ROTATION_SPEED)
 	
@@ -36,7 +38,7 @@ func run(delta):
 		start_tweening()
 	elif button_released:
 		tween.stop()
-		print_debug(e.cast_power)
+		e.spawn_tackle(cast_dir)
 		end("Fishing")
 	if e.get_input(e.input_cancel, 'just_pressed'):
 		end("Idle")

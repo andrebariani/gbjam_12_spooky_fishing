@@ -5,7 +5,11 @@ class_name PlayerBoat
 @onready var sm = $States
 @onready var sprite = $sprite
 @onready var arrow_sprite = $arrow
-@onready var tackle = $Tackle
+
+@onready var TACKLE_TSCN = preload(
+	"res://scenes/entities/tackle/tackle.tscn"
+)
+var tackle_instance = null
 
 # DEBUG
 @onready var castLabel = $Debug/cast
@@ -45,6 +49,21 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	castLabel.text = str(cast_power)
+	
+
+func spawn_tackle(_dir := Vector2.ZERO):
+	var tackle = TACKLE_TSCN.instantiate()
+	tackle_instance = tackle
+	tackle.init(self)
+	
+	get_parent().add_child(tackle)
+	
+	tackle.launch(cast_power, _dir)
+
+
+func despawn_tackle():
+	tackle_instance.call_deferred("queue_free")
+	tackle_instance = null
 
 
 func update_inputs():

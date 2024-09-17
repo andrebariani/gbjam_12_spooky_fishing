@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bewvky2dybhnm"]
+
+[ext_resource type="Script" path="res://scenes/entities/tackle/tackle.gd" id="1_cc13m"]
+[ext_resource type="Texture2D" uid="uid://c4sb62hcu6rv7" path="res://assets/arrow.png" id="2_k8cle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ink2m"]
+size = Vector2(3, 3)
+
+[node name="Tackle" type="Area2D"]
+script = ExtResource("1_cc13m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1875, 0.25)
+texture = ExtResource("2_k8cle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ink2m")
+disabled = true
