@@ -1,7 +1,7 @@
 extends State
 
 @onready var tween: Tween
-var cast_dir := Vector2.ZERO
+var cast_dir := Vector2.RIGHT
 
 func begin():
 	var e: PlayerBoat = entity
@@ -30,9 +30,9 @@ func run(delta):
 	e.velocity = e.velocity.move_toward(Vector2.ZERO, e.FRICTION * delta)
 	
 	if e.inputs.dirv != Vector2.ZERO and not button_pressed:
-		cast_dir = e.inputs.dirv.normalized()
 		var input_angle = e.inputs.dirv.normalized().angle()
 		e.arrow_sprite.rotation = lerp(e.arrow_sprite.rotation, input_angle, e.ROTATION_SPEED)
+		cast_dir = Vector2.from_angle(e.arrow_sprite.rotation)
 	
 	if button_pressed:
 		start_tweening()

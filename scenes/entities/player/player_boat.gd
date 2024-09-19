@@ -13,6 +13,7 @@ var tackle_instance = null
 
 # DEBUG
 @onready var castLabel = $Debug/cast
+@onready var posLabel = $Debug/pos
 
 
 @export var input_start := 'A'
@@ -49,10 +50,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	castLabel.text = str(cast_power)
+	posLabel.text = str("%.1f" % global_position.x, ", ",  "%.1f" % global_position.y)
 	
 
 func spawn_tackle(_dir := Vector2.ZERO):
-	var tackle = TACKLE_TSCN.instantiate()
+	var tackle: Tackle = TACKLE_TSCN.instantiate()
 	tackle_instance = tackle
 	tackle.init(self)
 	
