@@ -1,14 +1,12 @@
 extends Area2D
 class_name Tackle
 
-@export var max_reach = 64
-const ACCEL = 300.0
+@export var SPEED = 64.0
+@export var  ACCEL = 1
 
 @onready var collision = $CollisionShape2D
 @onready var sprite = $Sprite2D
 @onready var tween: Tween
-#@onready var path = $Path2D
-#@onready var path_follow = $Path2D/PathFollow2D
 
 enum {
 	WAIT,
@@ -21,7 +19,8 @@ var state = WAIT
 var dir = Vector2.ZERO
 var start_pos = Vector2.ZERO
 var target_pos = Vector2.ZERO
-var speed = 0
+var launch_speed = 0
+var reel_speed = 0.0
 var delta_elapsed = 0
 var arc_axis = 0
 
@@ -32,28 +31,36 @@ var bait: BaitData = null
 func init(_entity):
 	entity = _entity
 	global_position = entity.global_position
-	#print_debug(entity.global_position)
-	#print_debug(global_position)
 
 func _physics_process(delta):
+	var e: PlayerBoat = entity
 	delta_elapsed += delta * 5
 	
 	match state:
 		WAIT:
 			return
 		LAUNCH:
-			arc_axis = speed * sin(deg_to_rad(45)) * delta_elapsed - (0.5 * 9.8 * pow(delta_elapsed, 2))
+			arc_axis = launch_speed * sin(deg_to_rad(45)) * delta_elapsed - (0.5 * 9.8 * pow(delta_elapsed, 2))
 			
 			if arc_axis <= 0:
+				collision.disabled = false
 				state = FLOAT
 			
 			if arc_axis > 0:
-				var x_axis = speed * cos(deg_to_rad(45)) * delta_elapsed
+				var x_axis = launch_speed * cos(deg_to_rad(45)) * delta_elapsed
 				global_position = start_pos + (dir * x_axis)
 				
 				sprite.position.y = -arc_axis
 		FLOAT:
-			collision.disabled = false
+			var pressed = e.get_input(e.input_start, "pressed")
+			
+			if pressed:
+				reel_speed = lerp(reel_speed, SPEED, ACCEL * delta)
+			else:
+				reel_speed = lerp(reel_speed, 0.0, (ACCEL*4) * delta)
+			
+			global_position += global_position.direction_to( \
+					e.global_position) * reel_speed * delta
 			
 func launch(_power: int, _dir: Vector2):
 	state = LAUNCH
@@ -63,4 +70,4 @@ func launch(_power: int, _dir: Vector2):
 	
 	start_pos = entity.global_position
 	
-	speed = pow(_power * 9.8 / sin(2 * deg_to_rad(45)), 0.5)
+	launch_speed = pow(_power * 9.8 / sin(2 * deg_to_rad(45)), 0.5)
