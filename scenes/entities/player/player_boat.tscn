@@ -62,7 +62,6 @@ script = ExtResource("8_ef00f")
 script = ExtResource("10_l23x7")
 
 [node name="Debug" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -74,6 +73,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="pos" type="Label" parent="Debug"]
+visible = false
 offset_left = -94.0
 offset_top = -25.0
 offset_right = 99.0
