@@ -36,16 +36,8 @@ var roaming_range = 8
 var start_pos = self.global_position
 var target_pos = self.global_position
 
-func update_target_position():
-	var random_pos_x = randf_range(-roaming_range, roaming_range)
-	var random_pos_y = randf_range(-roaming_range, roaming_range)
-	var new_target_pos = Vector2(random_pos_x, random_pos_y)
-	target_pos = start_pos + new_target_pos
 
 func _ready():
-	#sprite.position = shadow_size_transform[fish.shadow_size].position
-	#sprite.scale = shadow_size_transform[fish.shadow_size].scale
-	
 	detectArea.init(self)
 	
 	update_target_position()
@@ -62,10 +54,10 @@ func _physics_process(delta):
 				state = ROAM
 		ROAM:
 			seek_bait()
-
 			var dir = global_position.direction_to(target_pos)
 			velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
-			look_at(target_pos)
+			rotate(dir.normalized().angle())
+			#look_at(target_pos)
 			
 			if global_position.distance_to(target_pos) <= 2:
 				print_debug('idle')
@@ -76,7 +68,7 @@ func _physics_process(delta):
 			if bait != null:
 				var dir = global_position.direction_to(bait.global_position)
 				velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
-				#rotation += dir * ROTATION_SPEED * delta
+				look_at(bait.global_position)
 			else:
 				state = IDLE
 				
@@ -88,6 +80,13 @@ func _physics_process(delta):
 func seek_bait():
 	if detectArea.can_see_bait():
 		state = CHASE
+
+
+func update_target_position():
+	var random_pos_x = randf_range(-roaming_range, roaming_range)
+	var random_pos_y = randf_range(-roaming_range, roaming_range)
+	var new_target_pos = Vector2(random_pos_x, random_pos_y)
+	target_pos = start_pos + new_target_pos
 
 
 func _on_roaming_timer_timeout():

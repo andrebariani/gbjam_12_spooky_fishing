@@ -20,8 +20,8 @@ var tackle_instance = null
 @export var input_cancel := 'B'
 
 const SPEED = 50.0
-const ROTATION_SPEED = 0.5
-const ARROW_ROTATION_SPEED = 0.5
+const ROTATION_SPEED = 0.05
+const ARROW_ROTATION_SPEED = 0.08
 const FRICTION = 25
 const ACCEL = 50
 
@@ -67,12 +67,6 @@ func spawn_tackle(_dir := Vector2.ZERO):
 func despawn_tackle():
 	tackle_instance.call_deferred("queue_free")
 	tackle_instance = null
-	
-
-func rotate_to_direction(_rotation: float, _dir: Vector2, _speed: float, delta: float):
-	var tangent = atan2(_dir.y, _dir.x)
-	var theta = wrapf(tangent - _rotation, -PI, PI)
-	return clamp(_speed * TAU * delta, 0, abs(theta)) * sign(theta)
 
 
 func update_inputs():

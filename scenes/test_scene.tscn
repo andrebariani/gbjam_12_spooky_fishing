@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bplpfbcxas5l1"]
+[gd_scene load_steps=12 format=3 uid="uid://bplpfbcxas5l1"]
 
 [ext_resource type="Shader" path="res://scenes/test_scene.gdshader" id="1_1ddho"]
 [ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="1_phtu1"]
+[ext_resource type="PackedScene" uid="uid://bfoabmylt4ar5" path="res://scenes/entities/shadow/shadow.tscn" id="1_wbpwi"]
 [ext_resource type="Texture2D" uid="uid://cusnwg0quwr5s" path="res://assets/Sprite-0003.png" id="3_7istp"]
 [ext_resource type="Script" path="res://scenes/ui/test_time.gd" id="6_npblf"]
 [ext_resource type="PackedScene" uid="uid://blk5upqrse004" path="res://scenes/entities/player/player_boat.tscn" id="6_plco2"]
@@ -59,6 +60,8 @@ _data = {
 }
 
 [node name="TestScene" type="Node2D"]
+
+[node name="Shadow" parent="." instance=ExtResource("1_wbpwi")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_7n752")
