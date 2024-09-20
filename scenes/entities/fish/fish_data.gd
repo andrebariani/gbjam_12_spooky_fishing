@@ -11,6 +11,13 @@ class_name FishData
 @export_enum("Static", "Fidgety") var behavior: String = "Static"
 @export_range(0.1, 20, 0.1) var size_centimeters: float
 
+@export_subgroup("Nibble Logic")
+@export var is_fixed_attempts: bool = false
+@export var max_attempts: int = 7
+@export var min_interval: float= 0.3
+@export var max_interval: float=  3.0
+@export var hook_window: float = 3.0
+
 @export_subgroup("Shadow")
 enum SHADOW_SIZE {SMALL, MEDIUM, LARGE, HUGE, TITANIC}
 @export var shadow_size: SHADOW_SIZE = SHADOW_SIZE.MEDIUM

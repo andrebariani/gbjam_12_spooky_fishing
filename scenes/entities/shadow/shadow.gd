@@ -7,13 +7,15 @@ class_name Shadow
 @onready var detectArea = $DetectArea
 @onready var lineOfSight = $LineOfSight
 
+@onready var sm: StateMachine = $States
+
 @onready var roamTimer = $RoamingTimer
 @onready var chaseTimer = $ChaseTimer
 
 const SPEED = 50.0
 const ROTATION_SPEED = 1.2
 const FRICTION = 50
-const ACCEL = 50
+const ACCEL = 20
 
 var state = IDLE
 enum {
@@ -21,7 +23,8 @@ enum {
 	ROAM,
 	CHASE,
 	NIBBLE,
-	BITE
+	BITE,
+	ESCAPE
 }
 
 var roaming_range = 64
@@ -35,43 +38,14 @@ func _ready():
 	detectArea.init(self)
 	
 	update_target_position()
+	
+	sm.init(self)
 
 
 func _physics_process(delta):
 	lineOfSight.force_raycast_update()
 	
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			seek_bait()
-			if roamTimer.is_stopped():
-				state = ROAM
-		ROAM:
-			seek_bait()
-			var dir = global_position.direction_to(target_pos)
-			velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
-			rotation = lerp_angle(rotation, dir.normalized().angle(), 0.05)
-			
-			if global_position.distance_to(target_pos) <= 1:
-				roamTimer.start(randi_range(1, 5))
-				state = IDLE
-		CHASE:
-			var bait = detectArea.bait
-			if bait != null:
-				var dir = global_position.direction_to(bait.global_position)
-				rotation = lerp_angle(rotation, dir.normalized().angle(), 0.05)
-				
-				if chaseTimer.is_stopped():
-					velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
-				else:
-					velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			else:
-				roamTimer.start(randi_range(2, 4))
-				state = IDLE
-		NIBBLE:
-			call_deferred("queue_free")
-		BITE:
-			call_deferred("queue_free")
+	sm.run(delta)
 	
 	animate_body(delta)
 	move_and_slide()
@@ -93,7 +67,7 @@ func animate_body(_delta):
 
 func seek_bait():
 	if detectArea.can_see_bait():
-		state = CHASE
+		sm.change_state("Chase")
 		chaseTimer.start(randf_range(0.5, 2))
 
 
@@ -106,7 +80,3 @@ func update_target_position():
 
 func _on_roaming_timer_timeout():
 	update_target_position()
-
-
-func _on_chase_timer_timeout():
-	pass

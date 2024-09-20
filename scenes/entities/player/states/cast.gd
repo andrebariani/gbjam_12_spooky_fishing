@@ -3,9 +3,11 @@ extends State
 @onready var tween: Tween
 var cast_dir := Vector2.RIGHT
 var rotation = 0
+var button_was_pressed: bool
 
 func begin():
 	var e: PlayerBoat = entity
+	button_was_pressed = e.get_input(e.input_start, 'pressed')
 	
 	e.cast_power = 0
 	
@@ -25,8 +27,13 @@ func run(delta):
 	var e: PlayerBoat = entity
 	
 	var button_pressed = e.get_input(e.input_start, 'pressed')
-	#var button_just_pressed = e.get_input(e.input_start, 'just_pressed')
+	var button_just_pressed = e.get_input(e.input_start, 'just_pressed')
 	var button_released = e.get_input(e.input_start, 'just_released')
+	if button_just_pressed:
+		button_was_pressed = false
+	if button_was_pressed:
+		button_pressed = false
+		button_released = false
 	
 	e.velocity = e.velocity.move_toward(Vector2.ZERO, e.FRICTION * delta)
 	

@@ -1,21 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfoabmylt4ar5"]
+[gd_scene load_steps=14 format=3 uid="uid://bfoabmylt4ar5"]
 
 [ext_resource type="Script" path="res://scenes/entities/shadow/shadow.gd" id="1_amnuf"]
 [ext_resource type="Resource" uid="uid://bts3u0vfq5bhl" path="res://scenes/entities/fish/Osteochthys.tres" id="2_iguua"]
 [ext_resource type="Texture2D" uid="uid://cusnwg0quwr5s" path="res://assets/Sprite-0003.png" id="3_t6ea0"]
 [ext_resource type="Script" path="res://scenes/entities/shadow/detect_area.gd" id="4_c6y7k"]
 [ext_resource type="Script" path="res://scenes/entities/state_machine.gd" id="5_7ytth"]
-[ext_resource type="Script" path="res://scenes/entities/state.gd" id="6_hiwmx"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/idle.gd" id="6_quvx2"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/roam.gd" id="7_v0eq8"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/chase.gd" id="8_x41m0"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/nibble.gd" id="9_qjkme"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/bite.gd" id="10_4x6r8"]
+[ext_resource type="Script" path="res://scenes/entities/shadow/escape.gd" id="11_4e4nq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yv2gw"]
-radius = 47.0
-height = 148.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_esab5"]
+radius = 44.0114
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbx01"]
-radius = 7.0
+radius = 4.0
 
 [node name="Shadow" type="CharacterBody2D"]
-position = Vector2(56, 74)
 collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_amnuf")
@@ -26,9 +29,8 @@ collide_with_areas = true
 metadata/_edit_lock_ = true
 
 [node name="Body" type="Line2D" parent="."]
-position = Vector2(20, 0)
 scale = Vector2(3, 3)
-points = PackedVector2Array(-6, 0, -14, 0, -20, 0)
+points = PackedVector2Array(0, 0, -8, 0, -14, 0)
 texture = ExtResource("3_t6ea0")
 texture_mode = 2
 metadata/_edit_lock_ = true
@@ -42,11 +44,10 @@ metadata/_edit_lock_ = true
 
 [node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
 position = Vector2(30, 0)
-shape = SubResource("CapsuleShape2D_yv2gw")
-metadata/_edit_lock_ = true
+shape = SubResource("CircleShape2D_esab5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 0)
+position = Vector2(-4, 0)
 shape = SubResource("CircleShape2D_xbx01")
 metadata/_edit_lock_ = true
 
@@ -61,12 +62,34 @@ autostart = true
 [node name="States" type="Node" parent="."]
 script = ExtResource("5_7ytth")
 
-[node name="state" type="Node" parent="States"]
-script = ExtResource("6_hiwmx")
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("6_quvx2")
+
+[node name="Roam" type="Node" parent="States"]
+script = ExtResource("7_v0eq8")
+
+[node name="Chase" type="Node" parent="States"]
+script = ExtResource("8_x41m0")
+
+[node name="Nibble" type="Node" parent="States"]
+script = ExtResource("9_qjkme")
+
+[node name="NibbleTimer" type="Timer" parent="States/Nibble"]
+one_shot = true
+
+[node name="Bite" type="Node" parent="States"]
+script = ExtResource("10_4x6r8")
+
+[node name="BiteTimer" type="Timer" parent="States/Bite"]
+one_shot = true
+
+[node name="Escape" type="Node" parent="States"]
+script = ExtResource("11_4e4nq")
 
 [connection signal="area_entered" from="DetectArea" to="DetectArea" method="_on_area_entered"]
 [connection signal="area_exited" from="DetectArea" to="DetectArea" method="_on_area_exited"]
 [connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectArea" to="DetectArea" method="_on_body_exited"]
 [connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]
-[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
+[connection signal="timeout" from="States/Nibble/NibbleTimer" to="States/Nibble" method="_on_nibble_timer_timeout"]
+[connection signal="timeout" from="States/Bite/BiteTimer" to="States/Bite" method="_on_bite_timer_timeout"]

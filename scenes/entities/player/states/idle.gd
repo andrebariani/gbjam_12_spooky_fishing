@@ -7,5 +7,5 @@ func run(delta):
 	
 	if e.inputs.dirv:
 		end("Move")
-	elif e.get_input(e.input_start, 'just_released'):
+	elif e.get_input(e.input_start, 'just_pressed'):
 		end("Cast")
