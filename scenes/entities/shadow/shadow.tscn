@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/entities/state.gd" id="6_hiwmx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yv2gw"]
-radius = 74.0
+radius = 47.0
 height = 148.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbx01"]
@@ -37,6 +37,7 @@ monitorable = false
 script = ExtResource("4_c6y7k")
 
 [node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
+position = Vector2(30, 0)
 shape = SubResource("CapsuleShape2D_yv2gw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -44,6 +45,10 @@ position = Vector2(-7, 0)
 shape = SubResource("CircleShape2D_xbx01")
 
 [node name="RoamingTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="ChaseTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
@@ -58,3 +63,4 @@ script = ExtResource("6_hiwmx")
 [connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectArea" to="DetectArea" method="_on_body_exited"]
 [connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]
