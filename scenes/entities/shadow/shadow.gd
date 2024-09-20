@@ -32,7 +32,7 @@ enum {
 	BITE
 }
 
-var roaming_range = 8
+var roaming_range = 64
 var start_pos = self.global_position
 var target_pos = self.global_position
 
@@ -56,10 +56,9 @@ func _physics_process(delta):
 			seek_bait()
 			var dir = global_position.direction_to(target_pos)
 			velocity = velocity.move_toward(dir * SPEED, ACCEL * delta)
-			rotate(dir.normalized().angle())
-			#look_at(target_pos)
+			rotation = lerp_angle(rotation, dir.normalized().angle(), 0.05)
 			
-			if global_position.distance_to(target_pos) <= 2:
+			if global_position.distance_to(target_pos) <= 1:
 				print_debug('idle')
 				roamTimer.start(randi_range(1, 5))
 				state = IDLE
@@ -79,6 +78,7 @@ func _physics_process(delta):
 	
 func seek_bait():
 	if detectArea.can_see_bait():
+		print_debug('chase!')
 		state = CHASE
 
 

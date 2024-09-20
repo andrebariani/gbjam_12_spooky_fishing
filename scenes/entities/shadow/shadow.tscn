@@ -7,14 +7,15 @@
 [ext_resource type="Script" path="res://scenes/entities/state_machine.gd" id="5_7ytth"]
 [ext_resource type="Script" path="res://scenes/entities/state.gd" id="6_hiwmx"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yv2gw"]
+radius = 74.0
+height = 148.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbx01"]
 radius = 7.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yv2gw"]
-radius = 45.0
-height = 154.0
-
 [node name="Shadow" type="CharacterBody2D"]
+collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_amnuf")
 fish = ExtResource("2_iguua")
@@ -22,28 +23,29 @@ fish = ExtResource("2_iguua")
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collide_with_areas = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(10, 0)
-shape = SubResource("CircleShape2D_xbx01")
-
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2(26, 0)
+position = Vector2(20, 0)
 scale = Vector2(3, 3)
-points = PackedVector2Array(-9, 0, 1, 0, 10, 0)
+points = PackedVector2Array(-6.66667, 0, -13.6667, 0, -21.3333, 0)
 texture = ExtResource("3_t6ea0")
 texture_mode = 2
+
+[node name="DetectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("4_c6y7k")
+
+[node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("CapsuleShape2D_yv2gw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 0)
+shape = SubResource("CircleShape2D_xbx01")
 
 [node name="RoamingTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
-
-[node name="DetectArea" type="Area2D" parent="."]
-collision_layer = 0
-script = ExtResource("4_c6y7k")
-
-[node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
-position = Vector2(-45, 0)
-shape = SubResource("CapsuleShape2D_yv2gw")
 
 [node name="States" type="Node" parent="."]
 script = ExtResource("5_7ytth")
@@ -51,6 +53,8 @@ script = ExtResource("5_7ytth")
 [node name="state" type="Node" parent="States"]
 script = ExtResource("6_hiwmx")
 
-[connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]
+[connection signal="area_entered" from="DetectArea" to="DetectArea" method="_on_area_entered"]
+[connection signal="area_exited" from="DetectArea" to="DetectArea" method="_on_area_exited"]
 [connection signal="body_entered" from="DetectArea" to="DetectArea" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectArea" to="DetectArea" method="_on_body_exited"]
+[connection signal="timeout" from="RoamingTimer" to="." method="_on_roaming_timer_timeout"]

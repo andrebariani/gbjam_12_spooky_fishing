@@ -61,8 +61,6 @@ _data = {
 
 [node name="TestScene" type="Node2D"]
 
-[node name="Shadow" parent="." instance=ExtResource("1_wbpwi")]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_7n752")
 position = Vector2(134, 70)
@@ -96,3 +94,6 @@ text = "00:00"
 script = ExtResource("6_npblf")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerBoat"]
+
+[node name="Shadow" parent="." instance=ExtResource("1_wbpwi")]
+position = Vector2(66, 147)

@@ -7,6 +7,9 @@
 size = Vector2(3, 3)
 
 [node name="Tackle" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_cc13m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

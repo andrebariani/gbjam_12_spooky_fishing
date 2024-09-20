@@ -19,6 +19,7 @@ _data = [Vector2(0, 1), 0.0, -0.505495, 0, 0, Vector2(1, 0.494505), -0.505495, 0
 point_count = 2
 
 [node name="PlayerBoat" type="CharacterBody2D"]
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_0tnni")
 
