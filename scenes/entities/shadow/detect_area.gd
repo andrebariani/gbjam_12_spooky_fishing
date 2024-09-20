@@ -31,5 +31,5 @@ func _on_area_entered(_area):
 	bait = _area
 
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	bait = null

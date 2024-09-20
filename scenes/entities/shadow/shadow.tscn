@@ -15,6 +15,7 @@ height = 148.0
 radius = 7.0
 
 [node name="Shadow" type="CharacterBody2D"]
+position = Vector2(56, 74)
 collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_amnuf")
@@ -22,27 +23,32 @@ fish = ExtResource("2_iguua")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collide_with_areas = true
+metadata/_edit_lock_ = true
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Body" type="Line2D" parent="."]
 position = Vector2(20, 0)
 scale = Vector2(3, 3)
-points = PackedVector2Array(-6.66667, 0, -13.6667, 0, -21.3333, 0)
+points = PackedVector2Array(-6, 0, -14, 0, -20, 0)
 texture = ExtResource("3_t6ea0")
 texture_mode = 2
+metadata/_edit_lock_ = true
 
 [node name="DetectArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("4_c6y7k")
+metadata/_edit_lock_ = true
 
 [node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
 position = Vector2(30, 0)
 shape = SubResource("CapsuleShape2D_yv2gw")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 0)
 shape = SubResource("CircleShape2D_xbx01")
+metadata/_edit_lock_ = true
 
 [node name="RoamingTimer" type="Timer" parent="."]
 one_shot = true
