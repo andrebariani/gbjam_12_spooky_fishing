@@ -25,6 +25,7 @@ const ROTATION_SPEED = 0.05
 const ARROW_ROTATION_SPEED = 0.08
 const FRICTION = 25
 const ACCEL = 50
+const CHANGE_SPRITE_TRESHOLD = 0.5
 
 const CAST_POWER_MAX = 100
 
@@ -44,6 +45,10 @@ var inputs = {
 
 func _ready():
 	sm.init(self)
+
+
+func _process(_delta: float) -> void:
+	update_sprite()
 
 
 func _physics_process(delta):
@@ -97,3 +102,29 @@ func get_input(input_name: String, state_name: String = 'just_pressed'):
 	if input_name == 'dirv':
 		return inputs[input_name]
 	return inputs[state_name][input_name]
+
+
+func update_sprite():
+	var vel: Vector2 = get_real_velocity()
+	
+	if vel.length() < CHANGE_SPRITE_TRESHOLD:
+		return
+	
+	var highest_dot = vel.dot(Vector2.RIGHT)
+	var most_aligned: int = 0
+	
+	var this_dot = vel.dot(Vector2.DOWN) + 20.0
+	if this_dot > highest_dot:
+		highest_dot = this_dot
+		most_aligned = 1
+	
+	this_dot = vel.dot(Vector2.UP) + 20.0
+	if this_dot > highest_dot:
+		highest_dot = this_dot
+		most_aligned = 3
+	
+	this_dot = vel.dot(Vector2.LEFT)
+	if this_dot > highest_dot:
+		most_aligned = 2
+	
+	$sprite.frame = most_aligned

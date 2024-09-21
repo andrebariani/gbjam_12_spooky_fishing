@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://blk5upqrse004"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player_boat.gd" id="1_0tnni"]
-[ext_resource type="Texture2D" uid="uid://b5n28ahruvs4w" path="res://icon.svg" id="2_btpqh"]
+[ext_resource type="Texture2D" uid="uid://c5bsj53gkqqqw" path="res://assets/boat.png" id="2_v6lwh"]
 [ext_resource type="Script" path="res://scenes/entities/player/water_trail.gd" id="3_hyxur"]
 [ext_resource type="Texture2D" uid="uid://c4sb62hcu6rv7" path="res://assets/arrow.png" id="3_nukac"]
 [ext_resource type="Script" path="res://scenes/entities/state_machine.gd" id="3_pfqpi"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scenes/entities/player/states/fishing.gd" id="10_l23x7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmrwm"]
-size = Vector2(9, 11)
+size = Vector2(8, 16)
 
 [sub_resource type="Curve" id="Curve_log4j"]
 _data = [Vector2(0, 1), 0.0, -0.505495, 0, 0, Vector2(1, 0.494505), -0.505495, 0.0, 0, 0]
@@ -24,9 +24,10 @@ motion_mode = 1
 script = ExtResource("1_0tnni")
 
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(-2.86102e-06, 2.86102e-06)
-scale = Vector2(0.0781251, 0.09375)
-texture = ExtResource("2_btpqh")
+rotation = 1.5708
+texture = ExtResource("2_v6lwh")
+vframes = 4
+frame = 1
 
 [node name="arrow" type="Sprite2D" parent="."]
 visible = false
@@ -40,6 +41,7 @@ shape = SubResource("RectangleShape2D_gmrwm")
 [node name="WaterTrail" type="Line2D" parent="."]
 show_behind_parent = true
 top_level = true
+z_index = -1
 position = Vector2(1, 0)
 width = 32.0
 width_curve = SubResource("Curve_log4j")
