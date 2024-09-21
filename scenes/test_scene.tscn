@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bplpfbcxas5l1"]
+[gd_scene load_steps=17 format=3 uid="uid://bplpfbcxas5l1"]
 
 [ext_resource type="Shader" path="res://scenes/test_scene.gdshader" id="1_1ddho"]
 [ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="1_phtu1"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://scenes/ui/test_time.gd" id="6_npblf"]
 [ext_resource type="PackedScene" uid="uid://blk5upqrse004" path="res://scenes/entities/player/player_boat.tscn" id="6_plco2"]
 [ext_resource type="Resource" uid="uid://hfrlgdhm8knk" path="res://scenes/entities/fish/Candiru.tres" id="7_7rl3r"]
+[ext_resource type="Resource" uid="uid://dqvg82tmdvvr3" path="res://scenes/entities/fish/Lungfish.tres" id="7_s8b0b"]
 [ext_resource type="Resource" uid="uid://dnychxls0ov2c" path="res://scenes/entities/fish/Redrum.tres" id="8_ynbb0"]
 [ext_resource type="Resource" uid="uid://cql3mb5e5csxs" path="res://scenes/entities/fish/Suevoleviathan.tres" id="9_4o1p8"]
+[ext_resource type="Resource" uid="uid://c2qvl1oea71dt" path="res://scenes/entities/fish/ZombieWrasse.tres" id="11_u6fg8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n752"]
 shader = ExtResource("1_1ddho")
@@ -100,6 +102,7 @@ script = ExtResource("6_npblf")
 
 [node name="Shadow" parent="." instance=ExtResource("1_wbpwi")]
 position = Vector2(66, 147)
+fish = ExtResource("7_s8b0b")
 
 [node name="Shadow2" parent="." instance=ExtResource("1_wbpwi")]
 position = Vector2(-3, 92)
@@ -115,3 +118,4 @@ fish = ExtResource("9_4o1p8")
 
 [node name="Shadow5" parent="." instance=ExtResource("1_wbpwi")]
 position = Vector2(-174, 137)
+fish = ExtResource("11_u6fg8")
