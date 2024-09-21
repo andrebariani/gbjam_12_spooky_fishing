@@ -100,22 +100,24 @@ script = ExtResource("6_npblf")
 
 [node name="Camera2D" type="Camera2D" parent="PlayerBoat"]
 
-[node name="Shadow" parent="." instance=ExtResource("1_wbpwi")]
+[node name="Fishes" type="Node2D" parent="."]
+
+[node name="Shadow" parent="Fishes" instance=ExtResource("1_wbpwi")]
 position = Vector2(66, 147)
 fish = ExtResource("7_s8b0b")
 
-[node name="Shadow2" parent="." instance=ExtResource("1_wbpwi")]
+[node name="Shadow2" parent="Fishes" instance=ExtResource("1_wbpwi")]
 position = Vector2(-3, 92)
 fish = ExtResource("7_7rl3r")
 
-[node name="Shadow3" parent="." instance=ExtResource("1_wbpwi")]
+[node name="Shadow3" parent="Fishes" instance=ExtResource("1_wbpwi")]
 position = Vector2(-57, 150)
 fish = ExtResource("8_ynbb0")
 
-[node name="Shadow4" parent="." instance=ExtResource("1_wbpwi")]
+[node name="Shadow4" parent="Fishes" instance=ExtResource("1_wbpwi")]
 position = Vector2(-170, 59)
 fish = ExtResource("9_4o1p8")
 
-[node name="Shadow5" parent="." instance=ExtResource("1_wbpwi")]
+[node name="Shadow5" parent="Fishes" instance=ExtResource("1_wbpwi")]
 position = Vector2(-174, 137)
 fish = ExtResource("11_u6fg8")

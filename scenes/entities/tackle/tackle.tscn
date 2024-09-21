@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bewvky2dybhnm"]
+[gd_scene load_steps=5 format=3 uid="uid://bewvky2dybhnm"]
 
 [ext_resource type="Script" path="res://scenes/entities/tackle/tackle.gd" id="1_cc13m"]
+[ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="2_85k4e"]
 [ext_resource type="Texture2D" uid="uid://c4sb62hcu6rv7" path="res://assets/arrow.png" id="2_k8cle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ink2m"]
@@ -11,6 +12,7 @@ collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_cc13m")
+bait = ExtResource("2_85k4e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1875, 0.25)

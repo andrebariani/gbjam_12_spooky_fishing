@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://dnychxls0ov2c"]
 
-[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_a42wg"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_nl5b8"]
 
 [resource]
-script = ExtResource("1_a42wg")
-id = &"candiru"
-name = "Candiru"
-description = "It breaches orifices and feasts on its prey from the inside out."
+script = ExtResource("1_nl5b8")
+id = &"redrum"
+name = "Redrum"
+description = "A fish completely covered in red, believed to be a bad omen."
 is_moochable = false
 stamina = 0.0
 behavior = "Static"
@@ -16,7 +16,7 @@ max_attempts = 7
 min_interval = 2.0
 max_interval = 3.0
 hook_window = 2.0
-shadow_size = 0
-weather = "None"
+shadow_size = 2
+weather = "Any"
 is_timed_only = false
 time_window = 0

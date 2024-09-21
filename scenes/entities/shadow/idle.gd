@@ -3,7 +3,11 @@ extends State
 
 func begin():
 	var e: Shadow = entity
-	e.roamTimer.start(randf_range(1, 5))
+	var timer: Timer = e.roamTimer
+	
+	if timer.is_stopped():
+		timer.start(randf_range(1, 5))
+
 
 func run(delta):
 	var e: Shadow = entity

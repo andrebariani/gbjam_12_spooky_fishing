@@ -18,6 +18,7 @@ var tackle_instance = null
 
 @export var input_start := 'A'
 @export var input_cancel := 'B'
+@export var selected_bait := preload("res://scenes/items/maggot.tres")
 
 const SPEED = 50.0
 const ROTATION_SPEED = 0.05

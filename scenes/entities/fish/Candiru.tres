@@ -17,6 +17,6 @@ min_interval = 2.0
 max_interval = 3.0
 hook_window = 2.0
 shadow_size = 0
-weather = "None"
+weather = "Any"
 is_timed_only = false
 time_window = 0

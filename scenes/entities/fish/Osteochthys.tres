@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://bts3u0vfq5bhl"]
+[gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://bts3u0vfq5bhl"]
 
+[ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_fr7dl"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_u5bmx"]
 
 [resource]
@@ -9,6 +10,7 @@ name = "Osteochthys"
 description = "Living fish bones that defies nature itself."
 is_moochable = false
 stamina = 0.0
+bait = ExtResource("1_fr7dl")
 behavior = "Static"
 size_centimeters = 12.0
 is_fixed_attempts = false
@@ -17,6 +19,6 @@ min_interval = 0.3
 max_interval = 3.0
 hook_window = 3.0
 shadow_size = 1
-weather = "None"
+weather = "Any"
 is_timed_only = false
 time_window = 0
