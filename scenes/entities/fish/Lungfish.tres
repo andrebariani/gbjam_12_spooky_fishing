@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://dqvg82tmdvvr3"]
+
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_4e5v4"]
+
+[resource]
+script = ExtResource("1_4e5v4")
+id = &"lungfish"
+name = "Piramboia"
+description = "A snake-like fish with a nasty bite."
+is_moochable = false
+stamina = 0.0
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 7
+min_interval = 0.3
+max_interval = 3.0
+hook_window = 3.0
+shadow_size = 1
+weather = "None"
+is_timed_only = false
+time_window = 0

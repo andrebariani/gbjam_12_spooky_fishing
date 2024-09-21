@@ -65,8 +65,9 @@ func spawn_tackle(_dir := Vector2.ZERO):
 
 
 func despawn_tackle():
-	tackle_instance.call_deferred("queue_free")
-	tackle_instance = null
+	if tackle_instance: 
+		tackle_instance.call_deferred("queue_free")
+		tackle_instance = null
 
 
 func update_inputs():
