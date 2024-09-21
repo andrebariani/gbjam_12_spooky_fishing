@@ -34,7 +34,7 @@ var entity: PlayerBoat = null
 
 func init(_entity):
 	entity = _entity
-	bait = entity.bait
+	bait = entity.selected_bait
 	global_position = entity.global_position
 
 

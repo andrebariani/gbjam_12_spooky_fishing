@@ -127,7 +127,6 @@ func _physics_process(delta):
 	
 	bg.scroll_offset.x = -distance * 10
 	bg.scroll_offset.y = distance / 10.0
-	#bg.scroll_offset.y = -bg.scroll_offset.y
 	
 	animate_body(delta)
 	

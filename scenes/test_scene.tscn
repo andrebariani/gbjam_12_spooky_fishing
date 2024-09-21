@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bplpfbcxas5l1"]
+[gd_scene load_steps=18 format=3 uid="uid://bplpfbcxas5l1"]
 
 [ext_resource type="Shader" path="res://scenes/test_scene.gdshader" id="1_1ddho"]
 [ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="1_phtu1"]
 [ext_resource type="PackedScene" uid="uid://bfoabmylt4ar5" path="res://scenes/entities/shadow/shadow.tscn" id="1_wbpwi"]
 [ext_resource type="Texture2D" uid="uid://cusnwg0quwr5s" path="res://assets/Sprite-0003.png" id="3_7istp"]
+[ext_resource type="Theme" path="res://scenes/ui/deafult_theme.tres" id="5_xu7kl"]
 [ext_resource type="Script" path="res://scenes/ui/test_time.gd" id="6_npblf"]
 [ext_resource type="PackedScene" uid="uid://blk5upqrse004" path="res://scenes/entities/player/player_boat.tscn" id="6_plco2"]
 [ext_resource type="Resource" uid="uid://hfrlgdhm8knk" path="res://scenes/entities/fish/Candiru.tres" id="7_7rl3r"]
@@ -91,10 +92,11 @@ autoplay = "new_animation"
 [node name="PlayerBoat" parent="." instance=ExtResource("6_plco2")]
 
 [node name="time" type="Label" parent="PlayerBoat"]
-offset_left = 24.0
-offset_top = 49.0
-offset_right = 79.0
-offset_bottom = 72.0
+offset_left = 39.0
+offset_top = 62.0
+offset_right = 94.0
+offset_bottom = 85.0
+theme = ExtResource("5_xu7kl")
 text = "00:00"
 script = ExtResource("6_npblf")
 
