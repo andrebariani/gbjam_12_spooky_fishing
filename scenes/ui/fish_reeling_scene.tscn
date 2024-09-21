@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://5pgojha1nxq3"]
+[gd_scene load_steps=7 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Resource" uid="uid://dqvg82tmdvvr3" path="res://scenes/entities/fish/Lungfish.tres" id="2_hkqx1"]
 [ext_resource type="Texture2D" uid="uid://ryj8cumeb5bg" path="res://assets/fish.png" id="2_i7pv4"]
+[ext_resource type="Texture2D" uid="uid://qc0kpcf442gy" path="res://assets/hook.png" id="3_rqj2c"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
@@ -10,12 +11,18 @@
 script = ExtResource("1_6doul")
 fish = ExtResource("2_hkqx1")
 
-[node name="Fish" type="Sprite2D" parent="."]
-position = Vector2(83, 71)
-texture = ExtResource("2_i7pv4")
+[node name="Hook" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(123, 0)
+texture = ExtResource("3_rqj2c")
 hframes = 2
-vframes = 3
-frame = 4
+
+[node name="Fish" type="Sprite2D" parent="."]
+position = Vector2(85, 73)
+texture = ExtResource("2_i7pv4")
+region_enabled = true
+region_rect = Rect2(6.82087, 70.6679, 85.6127, 49.3321)
 
 [node name="LineTension" type="Label" parent="."]
 offset_top = 110.0
@@ -73,7 +80,7 @@ motion_scale = Vector2(1.5, 1.5)
 motion_mirroring = Vector2(160, 0)
 
 [node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Wave2"]
-position = Vector2(0, 16)
+position = Vector2(0, 12)
 texture = ExtResource("5_vnr08")
 centered = false
 vframes = 4
@@ -83,7 +90,7 @@ frame = 1
 motion_mirroring = Vector2(160, 0)
 
 [node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/Wave3"]
-position = Vector2(0, 32)
+position = Vector2(0, 24)
 texture = ExtResource("5_vnr08")
 centered = false
 vframes = 4
@@ -94,7 +101,7 @@ motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(160, 0)
 
 [node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/Wave4"]
-position = Vector2(0, 48)
+position = Vector2(0, 36)
 texture = ExtResource("5_vnr08")
 centered = false
 vframes = 4
