@@ -1,6 +1,7 @@
 extends Area2D
 class_name Tackle
 
+@export var bait: BaitData = null
 @export var SPEED = 64.0
 @export var  ACCEL = 1
 
@@ -28,12 +29,12 @@ var arc_axis = 0
 var is_moving := false
 var hooked := false
 
-var entity = null
-var bait: BaitData = null
+var entity: PlayerBoat = null
 
 
 func init(_entity):
 	entity = _entity
+	bait = entity.bait
 	global_position = entity.global_position
 
 
