@@ -32,7 +32,6 @@ func spawn_possible_baits():
 
 
 func spawn_bait(bait: BaitData):
-	var pos = get_random_pos()
 	var bait_drop: BaitDrop = BAIT_TSCN.instantiate()
 	bait_drop.init(bait)
 	bait_drop.global_position = get_random_pos()
