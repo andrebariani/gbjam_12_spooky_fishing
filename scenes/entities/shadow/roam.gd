@@ -1,6 +1,13 @@
 extends State
 
 
+func begin():
+	var e: Shadow = entity
+	
+	if e.fish.is_timed_only and WorldTime.hours == e.fish.end_time_window:
+		e.despawn()
+
+
 func run(delta):
 	var e: Shadow = entity
 	

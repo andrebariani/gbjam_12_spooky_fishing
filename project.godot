@@ -18,6 +18,7 @@ config/icon="res://assets/test-sprite.png"
 [autoload]
 
 WorldTime="*res://scenes/global/world_time.tscn"
+SignalBus="*res://scenes/global/signal_bus.gd"
 
 [display]
 

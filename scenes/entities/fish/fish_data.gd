@@ -26,6 +26,10 @@ enum SHADOW_SIZE {SMALL, MEDIUM, LARGE, HUGE, TITANIC}
 @export var shadow_size: SHADOW_SIZE = SHADOW_SIZE.MEDIUM
 
 @export_subgroup("Spawn Conditions")
-@export_enum("Any", "Rain", "Snow", "Clear", "Fog") var weather: String = "Any"
+enum RARITY {COMMON, UNCOMMON, RARE, LEGENDARY}
+@export var rarity: RARITY = RARITY.COMMON
+enum WEATHER {ANY, RAIN, SNOW, CLEAR, FOG}
+@export var weather: WEATHER = WEATHER.ANY
 @export var is_timed_only: bool = false
-@export_range(0, 23, 1, "or_greater", "or_less") var time_window: int
+@export_range(0, 23, 1, "or_greater", "or_less") var start_time_window: int
+@export_range(0, 23, 1, "or_greater", "or_less") var end_time_window: int

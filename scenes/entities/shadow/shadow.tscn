@@ -25,6 +25,7 @@ script = ExtResource("1_amnuf")
 fish = ExtResource("2_iguua")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
 collide_with_areas = true
 metadata/_edit_lock_ = true
 

@@ -4,5 +4,5 @@
 
 [node name="WorldTime" type="Node"]
 script = ExtResource("1_l2kjv")
-minutes = 30
+minutes = 55
 hours = 16

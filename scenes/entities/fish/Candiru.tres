@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://hfrlgdhm8knk"]
 
-[ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_c8tvf"]
+[ext_resource type="Resource" uid="uid://dsq7w47c4m61i" path="res://scenes/items/beetle.tres" id="1_jx1br"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_pa6va"]
 
 [resource]
@@ -10,7 +10,7 @@ name = "Candiru"
 description = "It breaches through the flesh and feasts on its prey from the inside out."
 is_moochable = false
 stamina = 0.0
-bait = ExtResource("1_c8tvf")
+bait = ExtResource("1_jx1br")
 behavior = "Static"
 size_centimeters = 12.0
 is_fixed_attempts = false
@@ -21,4 +21,5 @@ hook_window = 2.0
 shadow_size = 0
 weather = "Any"
 is_timed_only = false
-time_window = 0
+start_time_window = 0
+end_time_window = 0

@@ -40,6 +40,7 @@ shape = SubResource("RectangleShape2D_gmrwm")
 [node name="WaterTrail" type="Line2D" parent="."]
 show_behind_parent = true
 top_level = true
+z_index = -1
 position = Vector2(1, 0)
 width = 32.0
 width_curve = SubResource("Curve_log4j")
