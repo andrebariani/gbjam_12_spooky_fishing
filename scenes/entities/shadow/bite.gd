@@ -56,6 +56,6 @@ func _on_bite_timer_timeout():
 	
 	bait.despawn()
 	
-	print_debug('Fish escaped...', e.fish.name)
+	print_debug('Fish escaped...')
 	
 	end('Escape')

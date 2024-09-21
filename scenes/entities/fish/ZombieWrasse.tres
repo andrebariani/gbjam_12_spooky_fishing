@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://c2qvl1oea71dt"]
+
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_vxb0g"]
+
+[resource]
+script = ExtResource("1_vxb0g")
+id = &"wrasse"
+name = "Zombie Wrasse"
+description = "A slow but agressive creature. It won't stop until it devours all."
+is_moochable = false
+stamina = 0.0
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 2
+min_interval = 8.0
+max_interval = 10.0
+hook_window = 1.5
+shadow_size = 3
+weather = "None"
+is_timed_only = false
+time_window = 0

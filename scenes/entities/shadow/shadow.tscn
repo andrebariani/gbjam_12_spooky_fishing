@@ -13,10 +13,10 @@
 [ext_resource type="Script" path="res://scenes/entities/shadow/escape.gd" id="11_4e4nq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_esab5"]
-radius = 44.0114
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbx01"]
-radius = 4.0
+radius = 2.0
 
 [node name="Shadow" type="CharacterBody2D"]
 collision_layer = 8
@@ -29,7 +29,6 @@ collide_with_areas = true
 metadata/_edit_lock_ = true
 
 [node name="Body" type="Line2D" parent="."]
-scale = Vector2(3, 3)
 points = PackedVector2Array(0, 0, -8, 0, -14, 0)
 texture = ExtResource("3_t6ea0")
 texture_mode = 2
@@ -43,11 +42,11 @@ script = ExtResource("4_c6y7k")
 metadata/_edit_lock_ = true
 
 [node name="DetectShape" type="CollisionShape2D" parent="DetectArea"]
-position = Vector2(30, 0)
+position = Vector2(18, 0)
 shape = SubResource("CircleShape2D_esab5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 0)
+position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_xbx01")
 metadata/_edit_lock_ = true
 

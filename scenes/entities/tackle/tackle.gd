@@ -71,8 +71,6 @@ func _physics_process(delta):
 			global_position += global_position.direction_to( \
 					e.global_position) * reel_speed * delta
 		BITE:
-			sprite.visible = false
-			
 			if e.get_input(e.input_start, "just_pressed"):
 				hooked = true
 
@@ -85,6 +83,8 @@ func despawn():
 func bite():
 	hooked = false
 	state = BITE
+	collision.disabled = false
+	sprite.visible = false
 
 
 func launch(_power: int, _dir: Vector2):
