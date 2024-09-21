@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cwhhig6vleiof"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_lib0b"]
+[ext_resource type="Script" path="res://scenes/ui/gallery.gd" id="1_n016w"]
 [ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="2_qsh7p"]
 [ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="3_80uf5"]
 [ext_resource type="Texture2D" uid="uid://b41ubi3p8d5wa" path="res://assets/button_down.png" id="4_68uod"]
@@ -49,7 +49,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lib0b")
+script = ExtResource("1_n016w")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
