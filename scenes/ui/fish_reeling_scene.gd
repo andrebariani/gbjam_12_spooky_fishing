@@ -7,6 +7,7 @@ class_name FishReelingScene
 
 @onready var flailTimer = $FlailTimer
 @onready var struggleTimer = $StruggleTimer
+@onready var bg = $ParallaxBackground
 
 @onready var lineTensionLabel = $LineTension
 @onready var distanceLabel = $Distance
@@ -83,6 +84,8 @@ func _physics_process(delta):
 			if button_pressed:
 				distance += (distance_rate / 2.0) * delta
 				line_tension += line_tension_rate * delta
+			else:
+				distance -= (distance_rate * 0.5) * delta
 				
 			add_stamina(-stamina_rate * 0.7, delta)
 			
@@ -92,6 +95,8 @@ func _physics_process(delta):
 			if button_pressed:
 				distance += (distance_rate / 5.0) * delta
 				line_tension += (line_tension_rate * 4) * delta
+			else:
+				distance -= (distance_rate) * delta
 				
 			add_stamina(-stamina_rate * 1.5, delta)
 			
@@ -105,7 +110,9 @@ func _physics_process(delta):
 	staminaLabel.text = str(int(stamina))
 	$state.text = str(state)
 	
-	if line_tension >= 100:
+	bg.scroll_offset.x = -distance * 10
+	
+	if line_tension >= 100 or distance <= 0:
 		print_debug('It got away...')
 		state = RESULT
 	elif distance >= 100:

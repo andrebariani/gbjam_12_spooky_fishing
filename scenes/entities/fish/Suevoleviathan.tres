@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="FishData" load_steps=2 format=3 uid="uid://cql3mb5e5csxs"]
+[gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://cql3mb5e5csxs"]
 
+[ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_3pm6q"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_isulu"]
 
 [resource]
@@ -9,6 +10,7 @@ name = "Suevoleviathan"
 description = "A primordial creature thought to be extinct long ago."
 is_moochable = false
 stamina = 0.0
+bait = ExtResource("1_3pm6q")
 behavior = "Static"
 size_centimeters = 12.0
 is_fixed_attempts = false

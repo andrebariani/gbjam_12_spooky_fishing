@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://5pgojha1nxq3"]
+[gd_scene load_steps=6 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Resource" uid="uid://dqvg82tmdvvr3" path="res://scenes/entities/fish/Lungfish.tres" id="2_hkqx1"]
 [ext_resource type="Texture2D" uid="uid://ryj8cumeb5bg" path="res://assets/fish.png" id="2_i7pv4"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
+[ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
 [node name="FishReelingScene" type="Node2D"]
 script = ExtResource("1_6doul")
@@ -55,6 +56,49 @@ one_shot = true
 
 [node name="StruggleTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Wave1" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(160, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Wave1"]
+texture = ExtResource("5_vnr08")
+centered = false
+vframes = 4
+
+[node name="Wave2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(160, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Wave2"]
+position = Vector2(0, 16)
+texture = ExtResource("5_vnr08")
+centered = false
+vframes = 4
+frame = 1
+
+[node name="Wave3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(160, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/Wave3"]
+position = Vector2(0, 32)
+texture = ExtResource("5_vnr08")
+centered = false
+vframes = 4
+frame = 2
+
+[node name="Wave4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(160, 0)
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/Wave4"]
+position = Vector2(0, 48)
+texture = ExtResource("5_vnr08")
+centered = false
+vframes = 4
+frame = 3
 
 [connection signal="timeout" from="FlailTimer" to="." method="_on_flail_timer_timeout"]
 [connection signal="timeout" from="StruggleTimer" to="." method="_on_timer_timeout"]
