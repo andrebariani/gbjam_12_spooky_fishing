@@ -30,6 +30,7 @@ window/stretch/scale_mode="integer"
 
 [gui]
 
+theme/custom="res://scenes/ui/deafult_theme.tres"
 theme/custom_font="res://assets/dogicapixelbold.otf"
 
 [input]

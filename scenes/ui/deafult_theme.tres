@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://5g30rxyaj341"]
+
+[ext_resource type="Texture2D" uid="uid://b41ubi3p8d5wa" path="res://assets/button_down.png" id="1_gsutr"]
+[ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="2_k8kff"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf2ft"]
+content_margin_bottom = 3.0
+texture = ExtResource("1_gsutr")
+texture_margin_left = 5.0
+texture_margin_top = 6.0
+texture_margin_right = 5.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d4m1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfpf4"]
+texture = ExtResource("2_k8kff")
+texture_margin_left = 5.0
+texture_margin_top = 6.0
+texture_margin_right = 5.0
+texture_margin_bottom = 6.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 8
+Button/styles/disabled = SubResource("StyleBoxTexture_uf2ft")
+Button/styles/focus = SubResource("StyleBoxEmpty_6d4m1")
+Button/styles/hover = SubResource("StyleBoxTexture_uf2ft")
+Button/styles/normal = SubResource("StyleBoxTexture_rfpf4")
+Button/styles/pressed = SubResource("StyleBoxTexture_uf2ft")
+Label/font_sizes/font_size = 8
