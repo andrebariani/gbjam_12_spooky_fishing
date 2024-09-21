@@ -5,14 +5,16 @@ class_name FishData
 @export var id: StringName
 @export var name: String
 @export var icon: ImageTexture
-@export var description: String
+@export_multiline var description: String
 @export var is_moochable: bool
 @export var stamina: float
 @export_enum("Static", "Fidgety") var behavior: String = "Static"
 @export_range(0.1, 20, 0.1) var size_centimeters: float
 
 @export_subgroup("Nibble Logic")
+## If set, it will nibble on the bait a fixed number of times
 @export var is_fixed_attempts: bool = false
+## Times the fish it will nibble before taking a bite 
 @export var max_attempts: int = 7
 @export var min_interval: float= 0.3
 @export var max_interval: float=  3.0

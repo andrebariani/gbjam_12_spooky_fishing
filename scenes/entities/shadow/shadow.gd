@@ -17,6 +17,14 @@ const ROTATION_SPEED = 1.2
 const FRICTION = 50
 const ACCEL = 20
 
+var shadow_scales = {
+	FishData.SHADOW_SIZE.SMALL: Vector2(0.5, 0.5),
+	FishData.SHADOW_SIZE.MEDIUM: Vector2(1, 1),
+	FishData.SHADOW_SIZE.LARGE: Vector2(1.5, 1.5),
+	FishData.SHADOW_SIZE.HUGE: Vector2(2.5, 2.5),
+	FishData.SHADOW_SIZE.TITANIC: Vector2(3, 3),
+}
+
 var state = IDLE
 enum {
 	IDLE,
@@ -40,6 +48,9 @@ func _ready():
 	update_target_position()
 	
 	sm.init(self)
+	
+	if fish:
+		self.scale = shadow_scales[fish.shadow_size]
 
 
 func _physics_process(delta):
