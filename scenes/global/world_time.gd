@@ -9,6 +9,8 @@ extends Node
 
 var delta_time := 0.0
 
+@onready var prev_hour := hours
+
 func _run(delta):
 	delta_time += (delta * ticks)
 	if delta_time < 1:
@@ -25,3 +27,8 @@ func _run(delta):
 	seconds = seconds % 60
 	minutes = minutes % 60
 	hours = hours % 24
+	
+	if prev_hour != hours:
+		SignalBus.hour_passed.emit(prev_hour)
+		prev_hour = hours
+		

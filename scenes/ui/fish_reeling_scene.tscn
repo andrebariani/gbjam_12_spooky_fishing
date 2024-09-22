@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
-[ext_resource type="Resource" uid="uid://dqvg82tmdvvr3" path="res://scenes/entities/fish/Lungfish.tres" id="2_hkqx1"]
 [ext_resource type="Texture2D" uid="uid://ryj8cumeb5bg" path="res://assets/fish.png" id="2_i7pv4"]
+[ext_resource type="Resource" uid="uid://hfrlgdhm8knk" path="res://scenes/entities/fish/Candiru.tres" id="2_uanna"]
 [ext_resource type="Texture2D" uid="uid://qc0kpcf442gy" path="res://assets/hook.png" id="3_rqj2c"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
 [node name="FishReelingScene" type="Node2D"]
 script = ExtResource("1_6doul")
-fish = ExtResource("2_hkqx1")
+fish = ExtResource("2_uanna")
 
 [node name="Hook" type="Sprite2D" parent="."]
 visible = false
@@ -24,32 +24,35 @@ texture = ExtResource("2_i7pv4")
 region_enabled = true
 region_rect = Rect2(6.82087, 70.6679, 85.6127, 49.3321)
 
-[node name="LineTension" type="Label" parent="."]
+[node name="Debug" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LineTension" type="Label" parent="Debug"]
 offset_top = 110.0
 offset_right = 42.0
 offset_bottom = 133.0
-scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
-[node name="Distance" type="Label" parent="."]
+[node name="Distance" type="Label" parent="Debug"]
 offset_top = 128.0
 offset_right = 42.0
 offset_bottom = 151.0
-scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
-[node name="Stamina" type="Label" parent="."]
+[node name="Stamina" type="Label" parent="Debug"]
 offset_left = 33.0
 offset_top = 128.0
 offset_right = 75.0
 offset_bottom = 151.0
-scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
-[node name="state" type="Label" parent="."]
+[node name="state" type="Label" parent="Debug"]
 offset_left = 79.0
 offset_top = 42.0
 offset_right = 121.0

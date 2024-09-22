@@ -11,9 +11,9 @@ class_name FishReelingScene
 @onready var struggleTimer = $StruggleTimer
 @onready var bg = $ParallaxBackground
 
-@onready var lineTensionLabel = $LineTension
-@onready var distanceLabel = $Distance
-@onready var staminaLabel = $Stamina
+@onready var lineTensionLabel = $Debug/LineTension
+@onready var distanceLabel = $Debug/Distance
+@onready var staminaLabel = $Debug/Stamina
 
 @onready var tween: Tween
 
@@ -50,22 +50,28 @@ var line_tension = 0
 var line_tension_rate = 10
 
 var max_stamina = 100
-var stamina = 80
+var stamina = 0
 var stamina_rate = 2
 
 
 func init(_fish):
 	fish = _fish
-	#max_stamina = fish.stamina
-	#stamina = max_stamina
-	max_stamina = 100
+	print_debug(fish.stamina)
+	max_stamina = fish.stamina
 	stamina = max_stamina
+	
+func _ready():
+	if fish:
+		#print_debug(fish.stamina)
+		max_stamina = fish.stamina
+		stamina = max_stamina
 
 var button_pressed = false
 var tug_just_pressed = false
 
 func _physics_process(delta):
-	update_inputs()
+	if state != WAIT:
+		update_inputs()
 	
 	button_pressed = get_input(input_reel, 'pressed')
 	tug_just_pressed = get_input(input_tug, 'just_pressed')
@@ -123,7 +129,7 @@ func _physics_process(delta):
 	lineTensionLabel.text = str(int(line_tension))
 	distanceLabel.text = str(int(distance))
 	staminaLabel.text = str(int(stamina))
-	$state.text = str(state)
+	$Debug/state.text = str(state)
 	
 	bg.scroll_offset.x = -distance * 10
 	bg.scroll_offset.y = distance / 10.0
@@ -209,6 +215,7 @@ func add_distance(rate, delta):
 
 func add_stamina(rate, delta):
 	stamina += rate * 8 * delta
+	#print_debug(max_stamina)
 	stamina = clamp(stamina, 0, max_stamina)
 
 

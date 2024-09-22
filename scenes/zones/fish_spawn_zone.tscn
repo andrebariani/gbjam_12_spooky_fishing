@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=4 uid="uid://cj01if0kcqan3"]
+
+[ext_resource type="Script" path="res://scenes/zones/fish_spawn_zone.gd" id="1_8ioe4"]
+[ext_resource type="Texture2D" uid="uid://b815gcb0apstm" path="res://assets/id_tiles.png" id="2_mtgdj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vfg1w"]
+texture = ExtResource("2_mtgdj")
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wx8b5"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_vfg1w")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvcap"]
+texture = ExtResource("2_mtgdj")
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_e6mfu"]
+sources/0 = SubResource("TileSetAtlasSource_lvcap")
+
+[node name="FishSpawnZoneTest" type="Node2D"]
+script = ExtResource("1_8ioe4")
+
+[node name="WallLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAgAAQAAAAEAAAAEAAcAAQAAAAEAAAAEAAYAAQAAAAEAAAAEAAUAAQAAAAEAAAAEAAQAAQAAAAEAAAAEAAMAAQAAAAEAAAADAAMAAQAAAAEAAAACAAMAAQAAAAEAAAABAAMAAQAAAAEAAAAAAAMAAQAAAAEAAAAAAP//AQAAAAEAAAABAP//AQAAAAEAAAACAP//AQAAAAEAAAADAP//AQAAAAEAAAAEAP//AQAAAAEAAAAFAP//AQAAAAEAAAAGAP//AQAAAAEAAAAHAP//AQAAAAEAAAAIAP//AQAAAAEAAAAJAP//AQAAAAEAAAAKAP//AQAAAAEAAAAKAAAAAQAAAAEAAAAKAAEAAQAAAAEAAAAKAAIAAQAAAAEAAAAKAAMAAQAAAAEAAAAKAAQAAQAAAAEAAAAKAAUAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAgAAQAAAAEAAAAFAAkAAQAAAAEAAAAGAAkAAQAAAAEAAAAHAAkAAQAAAAEAAAAIAAkAAQAAAAEAAAAJAAkAAQAAAAEAAAD//wAAAQAAAAEAAAD//wEAAQAAAAEAAAD//wIAAQAAAAEAAAA=")
+tile_set = SubResource("TileSet_wx8b5")
+
+[node name="SpawnLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAIAAEAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAEAAAABAAEAAAABAAEAAAABAAEAAAAAAAEAAAABAAEAAAAGAAIAAAABAAEAAAAHAAIAAAABAAEAAAAIAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAHAAYAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAGAAYAAAABAAEAAAAGAAcAAAABAAEAAAAHAAcAAAABAAEAAAAIAAQAAAABAAEAAAAIAAMAAAABAAEAAAAHAAQAAAABAAEAAAAIAAUAAAABAAEAAAAHAAMAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_e6mfu")
+
+[node name="Fishes" type="Node2D" parent="."]

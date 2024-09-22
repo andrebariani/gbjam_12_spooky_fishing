@@ -12,11 +12,7 @@ func begin():
 	
 	original_scale = e.body.scale
 	
-	tween = get_tree().create_tween()
-	tween.tween_property(e.body, 'scale', Vector2.ZERO, 0.5) \
-		.set_ease(Tween.EASE_IN) \
-		.set_trans(Tween.TRANS_QUAD)
-	tween.play()
+	e.play_despawn_anim()
 	
 	bait.bite()
 	
@@ -43,11 +39,7 @@ func before_end(_next):
 	var e: Shadow = entity
 	biteTimer.stop()
 	
-	tween = get_tree().create_tween()
-	tween.tween_property(e.body, 'scale', original_scale, 0.5) \
-		.set_ease(Tween.EASE_OUT) \
-		.set_trans(Tween.TRANS_QUAD)
-	tween.play()
+	e.play_spawn_anim()
 
 
 func _on_bite_timer_timeout():

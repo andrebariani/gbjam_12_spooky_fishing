@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=2 format=3 uid="uid://dsq7w47c4m61i"]
+
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="1_r0wr5"]
+
+[resource]
+script = ExtResource("1_r0wr5")
+id = &"beetle"
+name = "Beetle"
+description = ""

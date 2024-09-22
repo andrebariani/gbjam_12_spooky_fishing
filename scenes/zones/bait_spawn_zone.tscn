@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=4 uid="uid://by6khcpesuwc6"]
+
+[ext_resource type="Script" path="res://scenes/zones/bait_spawn_zone.gd" id="1_3tpsy"]
+[ext_resource type="Texture2D" uid="uid://b815gcb0apstm" path="res://assets/id_tiles.png" id="2_q44ot"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v888b"]
+texture = ExtResource("2_q44ot")
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gsmna"]
+sources/0 = SubResource("TileSetAtlasSource_v888b")
+
+[node name="BaitSpawnZone" type="Node2D"]
+script = ExtResource("1_3tpsy")
+
+[node name="SpawnLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACAAEAAAABAAEAAAACAAIAAAABAAEAAAACAAMAAAABAAEAAAACAAQAAAABAAEAAAADAAEAAAABAAEAAAADAAIAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAEAAAAEAAEAAAABAAEAAAAEAAIAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAEAAAAFAAEAAAABAAEAAAAFAAIAAAABAAEAAAAFAAMAAAABAAEAAAAFAAQAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAHAAEAAAABAAEAAAAHAAIAAAABAAEAAAAHAAMAAAABAAEAAAAHAAQAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_gsmna")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
