@@ -186,20 +186,20 @@ func flip_fish():
 	tween = get_tree().create_tween()
 	tween.stop()
 	if sprite_flip:
-		play_flip_anim(206, 206, -1, 0.3)
+		play_flip_anim(206, -1, 0.3)
 	else:
-		play_flip_anim(123, 206, 1, 0.3)
+		play_flip_anim(123, 1, 0.3)
 	tween.play()
 
 
-func play_flip_anim(left_point_x, right_point_x, _scale, _duration := 0.3):
+func play_flip_anim(point_x, _scale, _duration := 0.3):
 	tween = get_tree().create_tween()
 	tween.stop()
 	tween.tween_property(sprite_fish_offset, 'scale', Vector2(_scale, 1), _duration) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUAD)
 	tween.set_parallel()
-	tween.tween_property(hook_sprite, 'position', Vector2(left_point_x, 0), _duration) \
+	tween.tween_property(hook_sprite, 'position', Vector2(point_x, 0), _duration) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUAD)
 	#tween.tween_property(sprite_fish_offset, 'position', Vector2(left_point_x, 0), _duration) \
