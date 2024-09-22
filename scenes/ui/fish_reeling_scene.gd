@@ -43,7 +43,7 @@ enum {
 	RESULT
 }
 
-var state = REST
+var state = WAIT
 
 var distance = 50
 var distance_rate = 10
@@ -55,11 +55,14 @@ var stamina = 0
 var stamina_rate = 2
 
 
-func init(_fish):
+func start(_fish):
+	self.visible = true
+	bg.visible = true
 	fish = _fish
-	print_debug(fish.stamina)
 	max_stamina = fish.stamina
 	stamina = max_stamina
+	
+	distance = 50
 	
 	if fish.sprite:
 		sprite.texture = fish.sprite
@@ -71,12 +74,20 @@ func init(_fish):
 		
 		sprite.position = Vector2(frame_size.x / 2, 0)
 	
-func _ready():
-	init(fish)
-	#if fish:
-		##print_debug(fish.stamina)
-		#max_stamina = fish.stamina
-		#stamina = max_stamina
+	$AnimationPlayer.play("begin")
+	
+func reset():
+	state = WAIT
+	self.visible = false
+	bg.visible = false
+	
+	distance = 50
+	line_tension = 0
+	
+#func _ready():
+	#bg.visible = self.visible
+	#state = WAIT
+	#start(fish)
 
 var button_pressed = false
 var tug_just_pressed = false
@@ -90,7 +101,7 @@ func _physics_process(delta):
 	
 	match state:
 		WAIT:
-			return
+			pass
 		REST:
 			if button_pressed:
 				add_distance(distance_rate, delta)
@@ -149,17 +160,17 @@ func _physics_process(delta):
 	animate_body(delta)
 	
 	if line_tension >= 100 or distance <= 0:
-		print_debug('It got away...')
 		state = RESULT
+		flailTimer.stop()
+		struggleTimer.stop()
 		play_got_away_anim()
-		flailTimer.stop()
-		struggleTimer.stop()
+		#SignalBus.minigame_completed.emit(true, fish)
 	elif distance >= 100:
-		print_debug('You got a ', fish.name)
 		state = RESULT
 		flailTimer.stop()
 		struggleTimer.stop()
-		
+		SignalBus.minigame_completed.emit(true, fish)
+
 
 var sprite_flip = false
 var flash_line = true
@@ -172,6 +183,7 @@ func animate_body(_delta):
 		hook_sprite.self_modulate = Color(hook_sprite.self_modulate, alpha)
 	else:
 		hook_sprite.self_modulate = Color(hook_sprite.self_modulate, 255)
+	
 	if state == REST:
 		if sprite_flip != button_pressed:
 			sprite_flip = button_pressed
@@ -183,17 +195,16 @@ func animate_body(_delta):
 			
 
 func flip_fish():
-	tween = get_tree().create_tween()
-	tween.stop()
 	if sprite_flip:
 		play_flip_anim(206, -1, 0.3)
 	else:
 		play_flip_anim(123, 1, 0.3)
-	tween.play()
 
 
 func play_flip_anim(point_x, _scale, _duration := 0.3):
+	print_debug('FLIP')
 	tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.stop()
 	tween.tween_property(sprite_fish_offset, 'scale', Vector2(_scale, 1), _duration) \
 		.set_ease(Tween.EASE_IN) \
@@ -202,9 +213,6 @@ func play_flip_anim(point_x, _scale, _duration := 0.3):
 	tween.tween_property(hook_sprite, 'position', Vector2(point_x, 0), _duration) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUAD)
-	#tween.tween_property(sprite_fish_offset, 'position', Vector2(left_point_x, 0), _duration) \
-		#.set_ease(Tween.EASE_IN) \
-		#.set_trans(Tween.TRANS_QUAD)
 	tween.play()
 
 
@@ -212,6 +220,7 @@ func play_got_away_anim():
 	hook_sprite.self_modulate = Color(hook_sprite.self_modulate, 255)
 	hook_sprite.frame = 1
 	tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.stop()
 	tween.tween_property(sprite, 'position', Vector2(-100, 160), 3) \
 		.set_ease(Tween.EASE_IN) \
@@ -220,6 +229,12 @@ func play_got_away_anim():
 	tween.tween_property(hook_sprite, 'position', Vector2(123, 20), 10) \
 		.set_trans(Tween.TRANS_LINEAR)
 	tween.play()
+	
+	await get_tree().create_timer(3.0, true).timeout
+	
+	SignalBus.minigame_completed.emit()
+	state = WAIT
+	hook_sprite.frame = 0
 
 
 func _on_timer_timeout():
@@ -260,3 +275,7 @@ func get_input(input_name: String, state_name: String = 'just_pressed'):
 	if input_name == 'dirv':
 		return inputs[input_name]
 	return inputs[state_name][input_name]
+
+
+func _on_animation_player_animation_finished(_anim_name):
+	state = REST

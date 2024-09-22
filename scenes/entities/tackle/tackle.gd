@@ -28,6 +28,7 @@ var arc_axis = 0
 
 var is_moving := false
 var hooked := false
+var hooked_fish: FishData = null
 
 var entity: PlayerBoat = null
 
@@ -74,6 +75,7 @@ func _physics_process(delta):
 		BITE:
 			if e.get_input(e.input_start, "just_pressed"):
 				hooked = true
+				SignalBus.fish_hooked.emit(hooked_fish)
 
 
 func despawn():
@@ -81,8 +83,9 @@ func despawn():
 	e.despawn_tackle()
 
 
-func bite():
+func bite(_fish: FishData):
 	hooked = false
+	hooked_fish = _fish
 	state = BITE
 	collision.disabled = false
 	sprite.visible = false
