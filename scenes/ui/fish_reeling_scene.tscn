@@ -12,16 +12,17 @@ script = ExtResource("1_6doul")
 fish = ExtResource("2_uanna")
 
 [node name="Hook" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(123, 0)
 texture = ExtResource("3_rqj2c")
 hframes = 2
 
-[node name="Fish" type="Sprite2D" parent="."]
-position = Vector2(85, 73)
+[node name="FishOffset" type="Node2D" parent="Hook"]
+position = Vector2(-79, 72)
+
+[node name="Fish" type="Sprite2D" parent="Hook/FishOffset"]
+position = Vector2(127, 3)
 texture = ExtResource("2_i7pv4")
-region_enabled = true
 region_rect = Rect2(6.82087, 70.6679, 85.6127, 49.3321)
 
 [node name="Debug" type="Control" parent="."]
@@ -31,6 +32,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LineTension" type="Label" parent="Debug"]
+layout_mode = 0
 offset_top = 110.0
 offset_right = 42.0
 offset_bottom = 133.0
@@ -38,6 +40,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="Distance" type="Label" parent="Debug"]
+layout_mode = 0
 offset_top = 128.0
 offset_right = 42.0
 offset_bottom = 151.0
@@ -45,6 +48,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="Stamina" type="Label" parent="Debug"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 128.0
 offset_right = 75.0
@@ -53,6 +57,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="state" type="Label" parent="Debug"]
+layout_mode = 0
 offset_left = 79.0
 offset_top = 42.0
 offset_right = 121.0

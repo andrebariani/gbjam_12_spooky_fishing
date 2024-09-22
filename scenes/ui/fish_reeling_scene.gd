@@ -5,7 +5,8 @@ class_name FishReelingScene
 @export var input_reel := 'A'
 @export var input_tug := 'B'
 
-@onready var sprite = $Fish
+@onready var sprite_fish_offset = $Hook/FishOffset
+@onready var sprite = $Hook/FishOffset/Fish
 @onready var hook_sprite = $Hook
 @onready var flailTimer = $FlailTimer
 @onready var struggleTimer = $StruggleTimer
@@ -60,11 +61,22 @@ func init(_fish):
 	max_stamina = fish.stamina
 	stamina = max_stamina
 	
+	if fish.sprite:
+		sprite.texture = fish.sprite
+		
+		var texture_size = sprite.texture.get_size()
+		var hframes = sprite.hframes
+		var vframes = sprite.vframes
+		var frame_size = Vector2(texture_size.x / hframes, texture_size.y / vframes)
+		
+		sprite.position = Vector2(frame_size.x / 2, 0)
+	
 func _ready():
-	if fish:
-		#print_debug(fish.stamina)
-		max_stamina = fish.stamina
-		stamina = max_stamina
+	init(fish)
+	#if fish:
+		##print_debug(fish.stamina)
+		#max_stamina = fish.stamina
+		#stamina = max_stamina
 
 var button_pressed = false
 var tug_just_pressed = false
@@ -150,11 +162,16 @@ func _physics_process(delta):
 		
 
 var sprite_flip = false
+var flash_line = true
 func animate_body(_delta):
 	if state != RESULT:
-		hook_sprite.visible = !hook_sprite.visible
+		flash_line = !flash_line
+		var alpha = 255
+		if flash_line:
+			alpha = 0
+		hook_sprite.self_modulate = Color(hook_sprite.self_modulate, alpha)
 	else:
-		hook_sprite.visible = true
+		hook_sprite.self_modulate = Color(hook_sprite.self_modulate, 255)
 	if state == REST:
 		if sprite_flip != button_pressed:
 			sprite_flip = button_pressed
@@ -169,32 +186,37 @@ func flip_fish():
 	tween = get_tree().create_tween()
 	tween.stop()
 	if sprite_flip:
-		tween.tween_property(sprite, 'scale', Vector2(-1, 1), 0.3) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_QUAD)
-		tween.set_parallel()
-		tween.tween_property(hook_sprite, 'position', Vector2(206, 0), 0.3) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_QUAD)
+		play_flip_anim(206, 206, -1, 0.3)
 	else:
-		tween.tween_property(sprite, 'scale', Vector2(1, 1), 0.3) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_QUAD)
-		tween.set_parallel()
-		tween.tween_property(hook_sprite, 'position', Vector2(123, 0), 0.3) \
-			.set_ease(Tween.EASE_IN) \
-			.set_trans(Tween.TRANS_QUAD)
+		play_flip_anim(123, 206, 1, 0.3)
 	tween.play()
-	
-	
+
+
+func play_flip_anim(left_point_x, right_point_x, _scale, _duration := 0.3):
+	tween = get_tree().create_tween()
+	tween.stop()
+	tween.tween_property(sprite_fish_offset, 'scale', Vector2(_scale, 1), _duration) \
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_QUAD)
+	tween.set_parallel()
+	tween.tween_property(hook_sprite, 'position', Vector2(left_point_x, 0), _duration) \
+		.set_ease(Tween.EASE_IN) \
+		.set_trans(Tween.TRANS_QUAD)
+	#tween.tween_property(sprite_fish_offset, 'position', Vector2(left_point_x, 0), _duration) \
+		#.set_ease(Tween.EASE_IN) \
+		#.set_trans(Tween.TRANS_QUAD)
+	tween.play()
+
+
 func play_got_away_anim():
-	hook_sprite.visible = true
+	hook_sprite.self_modulate = Color(hook_sprite.self_modulate, 255)
 	hook_sprite.frame = 1
 	tween = get_tree().create_tween()
 	tween.stop()
-	tween.tween_property(sprite, 'position', Vector2(-50, 80), 1.5) \
+	tween.tween_property(sprite, 'position', Vector2(-100, 160), 3) \
 		.set_ease(Tween.EASE_IN) \
 		.set_trans(Tween.TRANS_QUAD)
+	tween.set_parallel()
 	tween.tween_property(hook_sprite, 'position', Vector2(123, 20), 10) \
 		.set_trans(Tween.TRANS_LINEAR)
 	tween.play()
@@ -215,7 +237,6 @@ func add_distance(rate, delta):
 
 func add_stamina(rate, delta):
 	stamina += rate * 8 * delta
-	#print_debug(max_stamina)
 	stamina = clamp(stamina, 0, max_stamina)
 
 
@@ -225,8 +246,6 @@ func add_line_tension(rate, delta):
 
 
 func update_inputs():
-	#inputs.dirv = Input.get_vector("left", "right", "up", "down")
-	
 	for i_p in inputs.pressed:
 		inputs.pressed[i_p] = Input.is_action_pressed(i_p)
 		

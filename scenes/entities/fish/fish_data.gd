@@ -4,8 +4,8 @@ class_name FishData
 @export_group("Base")
 @export var id: StringName
 @export var name: String
-@export var icon: ImageTexture
-@export var sprite: ImageTexture
+@export var icon: CompressedTexture2D
+@export var sprite: CompressedTexture2D
 @export_multiline var description: String
 @export var is_moochable: bool = false
 @export var stamina: float = 0
