@@ -19,7 +19,7 @@ func run(delta):
 		if e.tackle_instance.state != e.tackle_instance.LAUNCH:
 			if e.global_position.distance_to(e.tackle_instance.global_position) <= 8:
 				e.despawn_tackle()
-				end("Idle")
+				end("Cast")
 				return
 	else:
-		end("Idle")
+		end("Cast")

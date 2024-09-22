@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://5pgojha1nxq3"]
+[gd_scene load_steps=10 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Texture2D" uid="uid://ryj8cumeb5bg" path="res://assets/fish.png" id="2_i7pv4"]
@@ -7,21 +7,86 @@
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
+[sub_resource type="Animation" id="Animation_t5kx1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hook:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(123, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground:scroll_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_007l4"]
+resource_name = "begin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hook:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(250, 0), Vector2(123, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground:scroll_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-550, 5), Vector2(-500, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iin2"]
+_data = {
+"RESET": SubResource("Animation_t5kx1"),
+"begin": SubResource("Animation_007l4")
+}
+
 [node name="FishReelingScene" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_6doul")
 fish = ExtResource("2_uanna")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
 [node name="Hook" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(123, 0)
 texture = ExtResource("3_rqj2c")
 hframes = 2
 
-[node name="Fish" type="Sprite2D" parent="."]
-position = Vector2(85, 73)
+[node name="FishOffset" type="Node2D" parent="Hook"]
+position = Vector2(-79, 72)
+
+[node name="Fish" type="Sprite2D" parent="Hook/FishOffset"]
+position = Vector2(127, 3)
 texture = ExtResource("2_i7pv4")
-region_enabled = true
 region_rect = Rect2(6.82087, 70.6679, 85.6127, 49.3321)
 
 [node name="Debug" type="Control" parent="."]
@@ -31,6 +96,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LineTension" type="Label" parent="Debug"]
+layout_mode = 0
 offset_top = 110.0
 offset_right = 42.0
 offset_bottom = 133.0
@@ -38,6 +104,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="Distance" type="Label" parent="Debug"]
+layout_mode = 0
 offset_top = 128.0
 offset_right = 42.0
 offset_bottom = 151.0
@@ -45,6 +112,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="Stamina" type="Label" parent="Debug"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 128.0
 offset_right = 75.0
@@ -53,6 +121,7 @@ theme_override_fonts/font = ExtResource("4_ylwgf")
 text = "0"
 
 [node name="state" type="Label" parent="Debug"]
+layout_mode = 0
 offset_left = 79.0
 offset_top = 42.0
 offset_right = 121.0
@@ -68,6 +137,8 @@ one_shot = true
 one_shot = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+process_mode = 3
+follow_viewport_enabled = true
 
 [node name="Wave1" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(2, 2)
@@ -110,5 +181,13 @@ centered = false
 vframes = 4
 frame = 3
 
+[node name="CanvasLayer" type="CanvasLayer" parent="ParallaxBackground"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1iin2")
+}
+
 [connection signal="timeout" from="FlailTimer" to="." method="_on_flail_timer_timeout"]
 [connection signal="timeout" from="StruggleTimer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

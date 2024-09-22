@@ -31,12 +31,6 @@ func _ready():
 	spawn_fishes()
 
 
-func _physics_process(delta):
-	WorldTime._run(delta)
-	
-	#self.text = "%02d:%02d" % [WorldTime.hours, WorldTime.minutes] 
-
-
 func _on_hour_passed(prev_hour):
 	print_debug('hour passed! it was', prev_hour, WorldTime.hours)
 	update_spawned_fish()

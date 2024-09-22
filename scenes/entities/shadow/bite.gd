@@ -14,7 +14,7 @@ func begin():
 	
 	e.play_despawn_anim()
 	
-	bait.bite()
+	bait.bite(e.fish)
 	
 	biteTimer.start(e.fish.hook_window)
 
@@ -27,7 +27,6 @@ func run(delta):
 	
 	if bait:
 		if bait.hooked:
-			print_debug('You caught a ', e.fish.name)
 			biteTimer.stop()
 			bait.despawn()
 			e.call_deferred("queue_free")

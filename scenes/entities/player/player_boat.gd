@@ -45,6 +45,7 @@ var inputs = {
 
 func _ready():
 	sm.init(self)
+	SignalBus.fish_hooked.connect(_on_fish_hooked)
 
 
 func _process(_delta: float) -> void:
@@ -58,7 +59,9 @@ func _physics_process(delta):
 	
 	castLabel.text = str(cast_power)
 	posLabel.text = str("%.1f" % global_position.x, ", ",  "%.1f" % global_position.y)
-	
+
+func _on_fish_hooked(_fish: FishData):
+	print_debug('Caught a ', _fish.name)
 
 func spawn_tackle(_dir := Vector2.ZERO):
 	var tackle: Tackle = TACKLE_TSCN.instantiate()
@@ -77,16 +80,7 @@ func despawn_tackle():
 
 
 func update_inputs():
-	#if ControllerManager.is_controller_active():
-		#inputs.dirv.x = Input.get_axis("move_left_controller", "move_right_controller")
-		#inputs.dirv.y = Input.get_axis("move_up_controller", "move_down_controller")
-		#if inputs.dirv.length() < 0.3:
-			#inputs.dirv = Vector2.ZERO
-	#else:
-		#inputs.dirv.x = Input.get_axis("move_left", "move_right")
-		#inputs.dirv.y = Input.get_axis("move_up", "move_down")
 	inputs.dirv = Input.get_vector("left", "right", "up", "down")
-	
 	
 	for i_p in inputs.pressed:
 		inputs.pressed[i_p] = Input.is_action_pressed(i_p)

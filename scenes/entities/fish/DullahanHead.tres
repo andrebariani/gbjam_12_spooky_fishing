@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://fi08cdoratih"]
+
+[ext_resource type="Resource" uid="uid://dsq7w47c4m61i" path="res://scenes/items/beetle.tres" id="1_3d486"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="2_paba3"]
+
+[resource]
+script = ExtResource("2_paba3")
+id = &"dullahan_head"
+name = "Dullahan's Head"
+description = "It breaches through the flesh and feasts on its prey from the inside out."
+is_moochable = false
+stamina = 0.0
+bait = ExtResource("1_3d486")
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 7
+min_interval = 2.0
+max_interval = 3.0
+hook_window = 2.0
+shadow_size = 0
+rarity = 3
+weather = 0
+is_timed_only = true
+start_time_window = 18
+end_time_window = 6

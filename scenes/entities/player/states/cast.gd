@@ -9,6 +9,9 @@ func begin():
 	var e: PlayerBoat = entity
 	button_was_pressed = e.get_input(e.input_start, 'pressed')
 	
+	e.arrow_sprite.rotation = e.sprite.rotation
+	cast_dir = Vector2.from_angle(e.arrow_sprite.rotation)
+	
 	e.cast_power = 0
 	
 	tween = get_tree().create_tween()

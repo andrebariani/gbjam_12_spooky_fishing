@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scenes/entities/player/states/fishing.gd" id="10_l23x7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmrwm"]
-size = Vector2(8, 16)
+size = Vector2(6, 10)
 
 [sub_resource type="Curve" id="Curve_log4j"]
 _data = [Vector2(0, 1), 0.0, -0.505495, 0, 0, Vector2(1, 0.494505), -0.505495, 0.0, 0, 0]
