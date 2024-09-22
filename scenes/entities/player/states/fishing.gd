@@ -22,4 +22,4 @@ func run(delta):
 				end("Cast")
 				return
 	else:
-		end("Cast")
+		end("Idle")

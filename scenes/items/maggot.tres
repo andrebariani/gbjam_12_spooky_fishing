@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="BaitData" load_steps=2 format=3 uid="uid://do6402ag5uvm5"]
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://do6402ag5uvm5"]
 
 [ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="1_ga8sg"]
+[ext_resource type="Texture2D" uid="uid://u37hbuckq26j" path="res://assets/bait.png" id="1_lcjis"]
 
 [resource]
 script = ExtResource("1_ga8sg")
 id = &"maggot"
 name = "Maggot"
+icon = ExtResource("1_lcjis")
 description = ""

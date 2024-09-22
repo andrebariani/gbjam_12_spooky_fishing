@@ -31,8 +31,7 @@ func _ready():
 	spawn_fishes()
 
 
-func _on_hour_passed(prev_hour):
-	print_debug('hour passed! it was', prev_hour, WorldTime.hours)
+func _on_hour_passed(_prev_hour):
 	update_spawned_fish()
 
 
@@ -66,9 +65,7 @@ func spawn_fish(fish: FishData):
 		if fish.start_time_window != WorldTime.hours:
 			return
 	
-	print_debug('spawning fish: ', fish.name)
 	var pos = get_random_pos()
-	print('at: ', pos, zone_name)
 	var shadow: Shadow = SHADOW_TSCN.instantiate()
 	shadow.init(self, fish)
 	shadow.global_position = pos

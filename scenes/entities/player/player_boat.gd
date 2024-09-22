@@ -14,11 +14,14 @@ var tackle_instance = null
 # DEBUG
 @onready var castLabel = $Debug/cast
 @onready var posLabel = $Debug/pos
+@onready var menu = $GameMenu
 
 
 @export var input_start := 'A'
 @export var input_cancel := 'B'
+@export var input_select := 'select'
 @export var selected_bait := preload("res://scenes/items/maggot.tres")
+var is_selecting_bait = true
 
 const SPEED = 50.0
 const ROTATION_SPEED = 0.05
@@ -34,6 +37,9 @@ var cast_power = 0
 var input_map = {
 	A = false,
 	B = false,
+	select = false,
+	left = false,
+	right = false
 }
 
 var inputs = {
@@ -43,9 +49,18 @@ var inputs = {
 	just_released = input_map.duplicate()
 }
 
+
+var inventory = [
+	{"data": preload("res://scenes/items/maggot.tres"), "units": 3}
+]
+
 func _ready():
 	sm.init(self)
+	menu.init(self)
+	menu.update_inventory()
+	SignalBus.fish_bited.connect(_on_fish_bited)
 	SignalBus.fish_hooked.connect(_on_fish_hooked)
+	SignalBus.minigame_completed.connect(_on_minigame_completed)
 
 
 func _process(_delta: float) -> void:
@@ -60,8 +75,18 @@ func _physics_process(delta):
 	castLabel.text = str(cast_power)
 	posLabel.text = str("%.1f" % global_position.x, ", ",  "%.1f" % global_position.y)
 
+func _on_minigame_completed(_got_caught, _fish: FishData):
+	if _fish:
+		if _fish.mooch_bait != null:
+			# print_debug('got new bait!')
+			add_to_inventory(_fish.mooch_bait)
+
+func _on_fish_bited():
+	remove_from_inventory()
+
 func _on_fish_hooked(_fish: FishData):
-	print_debug('Caught a ', _fish.name)
+	pass
+	# print_debug('Caught a ', _fish.name)
 
 func spawn_tackle(_dir := Vector2.ZERO):
 	var tackle: Tackle = TACKLE_TSCN.instantiate()
@@ -77,6 +102,42 @@ func despawn_tackle():
 	if tackle_instance: 
 		tackle_instance.call_deferred("queue_free")
 		tackle_instance = null
+
+
+func add_to_inventory(bait: BaitData = null):
+	if bait:
+		var item = {
+			"data": bait,
+			"units": 1
+		}
+		for i in inventory:
+			if i.data.id == item.data.id:
+				i.units += 1
+				menu.update_inventory()
+				return
+				
+		inventory.push_back(item)
+		menu.update_inventory()
+
+
+func remove_from_inventory():
+	if selected_bait:
+		for i in inventory:
+			if i.data.id == selected_bait.id:
+				i.units -= 1
+				if i.units == 0:
+					inventory.erase(i.data.id)
+				break
+				
+	menu.update_inventory()
+
+
+var bait_inventory_id = 0
+func change_bait(dirv_x):
+	bait_inventory_id = int((bait_inventory_id + dirv_x)) % inventory.size()
+	
+	selected_bait = inventory[abs(bait_inventory_id)].data
+	menu.update_inventory()
 
 
 func update_inputs():
@@ -122,3 +183,9 @@ func update_sprite():
 		most_aligned = 2
 	
 	$sprite.frame = most_aligned
+
+
+func _on_area_2d_body_entered(body):
+	if body is TileMapLayer:
+		var zone: SpawnZone = body.get_parent()
+		SignalBus.zone_entered.emit(zone.zone_name)

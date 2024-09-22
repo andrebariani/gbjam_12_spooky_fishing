@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hb38w7lbp7f4"]
+[gd_scene load_steps=16 format=3 uid="uid://cse3rppgle6dh"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_menu.gd" id="1_brl2b"]
 [ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="2_x7r60"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://u37hbuckq26j" path="res://assets/bait.png" id="5_plb4u"]
 [ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="5_w2skk"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="7_hmosj"]
+[ext_resource type="Theme" uid="uid://bvvyqt4hg2j5s" path="res://scenes/ui/deafult_theme.tres" id="8_enl4r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf2ft"]
 content_margin_bottom = 3.0
@@ -36,7 +37,71 @@ Button/styles/hover = SubResource("StyleBoxTexture_uf2ft")
 Button/styles/normal = SubResource("StyleBoxTexture_rfpf4")
 Button/styles/pressed = SubResource("StyleBoxTexture_uf2ft")
 
+[sub_resource type="Animation" id="Animation_8op0j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/BaitMenu/BgRegion:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(159, 66)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/BaitMenu/BgRegion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6heu2"]
+resource_name = "region_change"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/BaitMenu/BgRegion:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(159, 66), Vector2(159, 83), Vector2(159, 83), Vector2(159, 66)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/BaitMenu/BgRegion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aahs3"]
+_data = {
+"RESET": SubResource("Animation_8op0j"),
+"region_change": SubResource("Animation_6heu2")
+}
+
 [node name="GameMenu" type="Control"]
+z_index = 100
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,6 +116,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 124.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_x7r60")
@@ -64,6 +130,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 1.0
+offset_right = -40.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 4
@@ -78,16 +148,50 @@ alignment = 1
 [node name="HBoxContainer" type="HFlowContainer" parent="Background/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+reverse_fill = true
 
-[node name="Icon" type="Button" parent="Background/MarginContainer/HBoxContainer2/HBoxContainer"]
+[node name="BaitName" type="Label" parent="Background/MarginContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_l3ygx")
-theme_override_fonts/font = ExtResource("7_hmosj")
-theme_override_font_sizes/font_size = 8
-text = "x9"
-icon = ExtResource("5_plb4u")
+text = "Maggot"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Region" type="Label" parent="Background/MarginContainer/HBoxContainer2/HBoxContainer"]
+[node name="BaitMenu" type="Control" parent="Background"]
+anchors_preset = 0
+offset_top = -124.0
+offset_right = 40.0
+offset_bottom = -84.0
+
+[node name="BgRegion" type="NinePatchRect" parent="Background/BaitMenu"]
+layout_mode = 0
+offset_top = -66.0
+offset_right = 159.0
+texture = ExtResource("2_x7r60")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="RegionContainer" type="MarginContainer" parent="Background/BaitMenu/BgRegion"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -14.0
+offset_right = 1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Background/BaitMenu/BgRegion/RegionContainer"]
+layout_mode = 2
+theme = ExtResource("8_enl4r")
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Region" type="Label" parent="Background/BaitMenu/BgRegion/RegionContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vk0jd")
 theme_override_font_sizes/font_size = 8
@@ -95,7 +199,36 @@ text = "Region"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Time" type="Label" parent="Background/MarginContainer/HBoxContainer2"]
+[node name="BaitIcon" type="Button" parent="Background/BaitMenu"]
+layout_mode = 2
+offset_top = 124.0
+offset_right = 38.0
+offset_bottom = 146.0
+theme = SubResource("Theme_l3ygx")
+theme_override_fonts/font = ExtResource("7_hmosj")
+theme_override_font_sizes/font_size = 8
+text = "x9"
+icon = ExtResource("5_plb4u")
+flat = true
+
+[node name="TimeBox" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 160.0
+offset_bottom = 20.0
+texture = ExtResource("2_x7r60")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/TimeBox"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 21.0
+
+[node name="Time" type="Label" parent="Background/TimeBox/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("7_hmosj")
@@ -104,4 +237,7 @@ text = "01:23"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Background/MarginContainer/HBoxContainer2/HBoxContainer/Icon" to="." method="_on_button_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aahs3")
+}

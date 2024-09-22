@@ -8,4 +8,5 @@ func run(delta):
 	if e.inputs.dirv:
 		end("Move")
 	elif e.get_input(e.input_start, 'just_pressed'):
-		end("Cast")
+		if e.inventory.size() != 0 and e.selected_bait:
+			end("Cast")

@@ -25,10 +25,10 @@ func _on_fish_hooked(_fish: FishData):
 	
 
 func _on_minigame_completed(got_caught: bool = false, _fish: FishData = null):
-	if got_caught:
-		print_debug('Caught a fish: ', _fish.name)
-	else:
-		print_debug('It got away...')
+	#if got_caught:
+	#	print_debug('Caught a fish: ', _fish.name)
+	#else:
+	#	print_debug('It got away...')
 		
 	get_tree().paused = false
 	world.visible = true

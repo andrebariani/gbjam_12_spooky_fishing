@@ -17,7 +17,7 @@ func can_see_bait():
 		
 		ray.target_position = bait_pos
 		
-		print_debug(ray.target_position)
+		# print_debug(ray.target_position)
 		
 		if not ray.is_colliding():
 			return true
@@ -25,11 +25,11 @@ func can_see_bait():
 	return false
 
 func _on_body_entered(_body):
-	print_debug('somethin here')
+	# print_debug('somethin here')
 	bait = _body
 
 func _on_body_exited(_body):
-	print_debug('bye')
+	# print_debug('bye')
 	bait = null
 
 

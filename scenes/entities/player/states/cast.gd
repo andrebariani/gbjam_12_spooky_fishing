@@ -30,6 +30,7 @@ func run(delta):
 	var e: PlayerBoat = entity
 	
 	var button_pressed = e.get_input(e.input_start, 'pressed')
+	var button_pressed_select_bait = e.get_input(e.input_select, 'pressed')
 	var button_just_pressed = e.get_input(e.input_start, 'just_pressed')
 	var button_released = e.get_input(e.input_start, 'just_released')
 	if button_just_pressed:
@@ -46,6 +47,8 @@ func run(delta):
 		
 		cast_dir = Vector2.from_angle(e.arrow_sprite.rotation)
 	
+	if button_pressed_select_bait:
+		end("SelectBait")
 	if button_pressed:
 		start_tweening()
 	elif button_released:
