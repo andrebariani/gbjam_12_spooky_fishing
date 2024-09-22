@@ -5,6 +5,7 @@ class_name FishData
 @export var id: StringName
 @export var name: String
 @export var icon: ImageTexture
+@export var sprite: ImageTexture
 @export_multiline var description: String
 @export var is_moochable: bool = false
 @export var stamina: float = 0

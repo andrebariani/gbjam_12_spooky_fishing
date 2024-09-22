@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_nl5b8")
 id = &"redrum"
-name = "Redrum"
+name = "Redrum Bass"
 description = "A fish completely covered in red, believed to be a bad omen."
 is_moochable = false
 stamina = 0.0
@@ -19,7 +19,8 @@ min_interval = 2.0
 max_interval = 3.0
 hook_window = 2.0
 shadow_size = 2
-weather = "Any"
+rarity = 0
+weather = 0
 is_timed_only = true
 start_time_window = 13
 end_time_window = 17
