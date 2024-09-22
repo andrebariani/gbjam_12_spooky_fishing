@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://blk5upqrse004"]
+[gd_scene load_steps=16 format=3 uid="uid://blk5upqrse004"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player_boat.gd" id="1_0tnni"]
 [ext_resource type="Texture2D" uid="uid://c5bsj53gkqqqw" path="res://assets/boat.png" id="2_v6lwh"]
@@ -10,6 +10,11 @@
 [ext_resource type="Script" path="res://scenes/entities/player/states/move.gd" id="4_xfj8a"]
 [ext_resource type="Script" path="res://scenes/entities/player/states/cast.gd" id="8_ef00f"]
 [ext_resource type="Script" path="res://scenes/entities/player/states/fishing.gd" id="10_l23x7"]
+[ext_resource type="Script" path="res://scenes/entities/player/select_bait.gd" id="10_svh86"]
+[ext_resource type="PackedScene" uid="uid://cse3rppgle6dh" path="res://scenes/ui/game_menu.tscn" id="11_k266c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bi6u"]
+size = Vector2(8, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmrwm"]
 size = Vector2(6, 10)
@@ -20,8 +25,16 @@ point_count = 2
 
 [node name="PlayerBoat" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_0tnni")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8bi6u")
 
 [node name="sprite" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -61,10 +74,14 @@ script = ExtResource("4_xfj8a")
 [node name="Cast" type="Node" parent="States"]
 script = ExtResource("8_ef00f")
 
+[node name="SelectBait" type="Node" parent="States"]
+script = ExtResource("10_svh86")
+
 [node name="Fishing" type="Node" parent="States"]
 script = ExtResource("10_l23x7")
 
 [node name="Debug" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -84,3 +101,12 @@ offset_right = 99.0
 offset_bottom = -2.0
 text = "1.1, 2.2"
 horizontal_alignment = 1
+
+[node name="GameMenu" parent="." instance=ExtResource("11_k266c")]
+offset_left = -80.0
+offset_top = -72.0
+offset_right = 80.0
+offset_bottom = 71.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -8,5 +8,5 @@ func init(_bait: BaitData):
 
 func _on_body_entered(body):
 	if body is PlayerBoat:
-		print_debug('Got bait!')
+		body.add_to_inventory(bait)
 		call_deferred("queue_free")

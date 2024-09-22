@@ -7,9 +7,9 @@ class_name FishData
 @export var icon: CompressedTexture2D
 @export var sprite: CompressedTexture2D
 @export_multiline var description: String
-@export var is_moochable: bool = false
-@export var stamina: float = 0
 @export var bait: BaitData = preload("res://scenes/items/maggot.tres")
+@export var stamina: float = 0
+@export var mooch_bait: BaitData = null
 @export_enum("Static", "Fidgety") var behavior: String = "Static"
 @export_range(0.1, 20, 0.1) var size_centimeters: float
 

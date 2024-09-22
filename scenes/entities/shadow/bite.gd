@@ -10,6 +10,8 @@ func begin():
 	var e: Shadow = entity
 	var bait = e.detectArea.bait
 	
+	SignalBus.fish_bited.emit()
+	
 	original_scale = e.body.scale
 	
 	e.play_despawn_anim()
@@ -47,6 +49,6 @@ func _on_bite_timer_timeout():
 	
 	bait.despawn()
 	
-	print_debug('Fish escaped...')
+	# print_debug('Fish escaped...')
 	
 	end('Escape')

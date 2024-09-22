@@ -202,7 +202,6 @@ func flip_fish():
 
 
 func play_flip_anim(point_x, _scale, _duration := 0.3):
-	print_debug('FLIP')
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.stop()
@@ -232,7 +231,7 @@ func play_got_away_anim():
 	
 	await get_tree().create_timer(3.0, true).timeout
 	
-	SignalBus.minigame_completed.emit()
+	SignalBus.minigame_completed.emit(false, null)
 	state = WAIT
 	hook_sprite.frame = 0
 

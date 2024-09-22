@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=2 format=3 uid="uid://jg34i20bsud7"]
+
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="1_snp67"]
+
+[resource]
+script = ExtResource("1_snp67")
+id = &"lungfish"
+name = "Piram"
+description = ""
