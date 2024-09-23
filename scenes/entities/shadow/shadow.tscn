@@ -30,6 +30,7 @@ collide_with_areas = true
 metadata/_edit_lock_ = true
 
 [node name="Body" type="Line2D" parent="."]
+z_index = -10
 points = PackedVector2Array(0, 0, -8, 0, -14, 0)
 texture = ExtResource("3_t6ea0")
 texture_mode = 2

@@ -1,46 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwhhig6vleiof"]
+[gd_scene load_steps=9 format=3 uid="uid://cwhhig6vleiof"]
 
 [ext_resource type="Script" path="res://scenes/ui/gallery.gd" id="1_n016w"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="2_jfm80"]
 [ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="2_qsh7p"]
 [ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="3_80uf5"]
-[ext_resource type="Texture2D" uid="uid://b41ubi3p8d5wa" path="res://assets/button_down.png" id="4_68uod"]
-[ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="5_2hvot"]
-[ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="5_n3fpc"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf2ft"]
-content_margin_bottom = 3.0
-texture = ExtResource("4_68uod")
-texture_margin_left = 5.0
-texture_margin_top = 6.0
-texture_margin_right = 5.0
-texture_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6d4m1"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfpf4"]
-texture = ExtResource("5_n3fpc")
-texture_margin_left = 5.0
-texture_margin_top = 6.0
-texture_margin_right = 5.0
-texture_margin_bottom = 6.0
-
-[sub_resource type="Theme" id="Theme_l3ygx"]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_focus_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 8
-Button/styles/disabled = SubResource("StyleBoxTexture_uf2ft")
-Button/styles/focus = SubResource("StyleBoxEmpty_6d4m1")
-Button/styles/hover = SubResource("StyleBoxTexture_uf2ft")
-Button/styles/normal = SubResource("StyleBoxTexture_rfpf4")
-Button/styles/pressed = SubResource("StyleBoxTexture_uf2ft")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vdse1"]
-texture = ExtResource("2_qsh7p")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+[ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="3_eye13"]
+[ext_resource type="Resource" uid="uid://c2qvl1oea71dt" path="res://scenes/entities/fish/ZombieWrasse.tres" id="4_3cx24"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="4_7bqm2"]
+[ext_resource type="PackedScene" uid="uid://bw8d61cqye3lk" path="res://scenes/ui/fish_details.tscn" id="5_nxdvq"]
 
 [node name="Gallery" type="Control"]
 layout_mode = 3
@@ -50,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n016w")
+fishes = Array[ExtResource("2_jfm80")]([ExtResource("3_eye13"), ExtResource("4_3cx24"), null, null, null, null, null, null, null, null, null])
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -64,117 +32,132 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="Background"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Galery" type="Label" parent="Background/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_80uf5")
+theme_override_font_sizes/font_size = 8
+text = "Galery"
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/ScrollContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Button" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_l3ygx")
-theme_override_font_sizes/font_size = 8
-text = "B"
-
-[node name="Button2" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_l3ygx")
-theme_override_font_sizes/font_size = 8
-text = "A"
-
-[node name="Button3" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_l3ygx")
-theme_override_font_sizes/font_size = 8
-text = "R"
-
-[node name="Button4" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_l3ygx")
-theme_override_font_sizes/font_size = 8
-text = "I"
-
-[node name="GridContainer" type="GridContainer" parent="Background/MarginContainer/VBoxContainer"]
+[node name="FishList" type="GridContainer" parent="Background/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 3
+focus_neighbor_bottom = NodePath("Button1")
+focus_next = NodePath("Button1")
+focus_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button1" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+size_flags_horizontal = 3
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer"]
+[node name="Button2" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+disabled = true
+text = "?????
+"
+icon = ExtResource("4_7bqm2")
 
-[node name="PanelContainer4" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button3" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer4"]
+[node name="Button4" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="PanelContainer5" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button5" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer5"]
+[node name="Button6" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="PanelContainer2" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button7" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer2"]
+[node name="Button8" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="PanelContainer6" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button9" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer6"]
+[node name="Button10" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="PanelContainer3" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button11" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_vdse1")
+disabled = true
+text = "?????"
+icon = ExtResource("4_7bqm2")
 
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/GridContainer/PanelContainer3"]
-layout_mode = 2
-texture = ExtResource("5_2hvot")
-stretch_mode = 5
+[node name="FishDetails" parent="." instance=ExtResource("5_nxdvq")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
-[node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_80uf5")
-theme_override_font_sizes/font_size = 8
-text = "Catalog"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/Button3" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/Button4" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button1" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button3" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button4" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button5" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button6" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button7" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button8" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button9" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button10" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button11" to="." method="_on_button_pressed"]
+[connection signal="hidden" from="FishDetails" to="." method="_on_fish_details_hidden"]
