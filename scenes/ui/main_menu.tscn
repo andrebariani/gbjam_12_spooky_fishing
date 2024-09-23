@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6fgxvt2hkjl1"]
+[gd_scene load_steps=14 format=3 uid="uid://b6fgxvt2hkjl1"]
 
 [ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="1_c6b2g"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_i55ut"]
 [ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="2_w3gf1"]
+[ext_resource type="Theme" uid="uid://5g30rxyaj341" path="res://scenes/ui/deafult_theme.tres" id="3_8dc0f"]
 [ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="3_k2uwq"]
 [ext_resource type="Texture2D" uid="uid://b41ubi3p8d5wa" path="res://assets/button_down.png" id="4_o7g3w"]
 
@@ -24,7 +25,7 @@ texture_margin_right = 5.0
 texture_margin_bottom = 6.0
 
 [sub_resource type="Theme" id="Theme_l3ygx"]
-Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_color = Color(0.898039, 0.917647, 0.862745, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 8
@@ -33,6 +34,17 @@ Button/styles/focus = SubResource("StyleBoxEmpty_6d4m1")
 Button/styles/hover = SubResource("StyleBoxTexture_uf2ft")
 Button/styles/normal = SubResource("StyleBoxTexture_rfpf4")
 Button/styles/pressed = SubResource("StyleBoxTexture_uf2ft")
+
+[sub_resource type="InputEventKey" id="InputEventKey_ypb7u"]
+keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_iyc5n"]
+device = -1
+keycode = 90
+unicode = 122
+
+[sub_resource type="Shortcut" id="Shortcut_tcinn"]
+events = [SubResource("InputEventKey_ypb7u"), SubResource("InputEventKey_iyc5n")]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -72,6 +84,8 @@ last_wrap_alignment = 2
 
 [node name="Label" type="Label" parent="Background/HFlowContainer"]
 layout_mode = 2
+theme = ExtResource("3_8dc0f")
+theme_override_colors/font_color = Color(0.898039, 0.917647, 0.862745, 1)
 theme_override_fonts/font = ExtResource("2_w3gf1")
 theme_override_font_sizes/font_size = 16
 text = "LE FISHE"
@@ -82,6 +96,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme = SubResource("Theme_l3ygx")
 theme_override_font_sizes/font_size = 8
+shortcut = SubResource("Shortcut_tcinn")
 text = "Play"
 
 [connection signal="pressed" from="Background/HFlowContainer/Button" to="." method="_on_button_pressed"]
