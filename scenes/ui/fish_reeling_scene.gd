@@ -16,6 +16,10 @@ class_name FishReelingScene
 @onready var distanceLabel = $Debug/Distance
 @onready var staminaLabel = $Debug/Stamina
 
+@onready var music = $sounds/music
+@onready var sfx_flail = $sounds/sfx_flail
+@onready var sfx_struggle = $sounds/sfx_struggle
+
 @onready var tween: Tween
 
 @export var fish: FishData
@@ -56,6 +60,12 @@ var stamina_rate = 2
 
 
 func start(_fish):
+	$transition.visible = true
+	$AnimationPlayer.play('transition')
+	$sounds/sfx_splash.play(0.0)
+	
+	await get_tree().create_timer(1.5, true).timeout
+	
 	self.visible = true
 	bg.visible = true
 	fish = _fish
@@ -75,6 +85,8 @@ func start(_fish):
 		sprite.position = Vector2(frame_size.x / 2, 0)
 	
 	$AnimationPlayer.play("begin")
+	$transition.visible = false
+	music.play(0.0)
 	
 func reset():
 	state = WAIT
@@ -84,10 +96,10 @@ func reset():
 	distance = 50
 	line_tension = 0
 	
-func _ready():
-	bg.visible = self.visible
-	state = WAIT
-	start(fish)
+#func _ready():
+	#bg.visible = self.visible
+	#state = WAIT
+	#start(fish)
 
 var button_pressed = false
 var tug_just_pressed = false
@@ -133,6 +145,9 @@ func _physics_process(delta):
 					flailTimer.start(sec)
 					struggleTimer.start(sec + randf_range(0, 1))
 		FLAIL:
+			if not sfx_flail.playing:
+				sfx_flail.play(0.0)
+				sfx_struggle.stop()
 			sprite_frame_anim += 1
 			if (sprite_frame_anim) % 20 == 0:
 				next_frame()
@@ -149,7 +164,12 @@ func _physics_process(delta):
 			
 			if stamina <= 0:
 				state = REST
+				sfx_struggle.stop()
 		STRUGGLE:
+			if not sfx_struggle.playing:
+				sfx_struggle.play(0.0)
+				sfx_flail.stop()
+			
 			sprite_frame_anim += 1
 			if (sprite_frame_anim) % 5 == 0:
 				next_frame()
@@ -166,6 +186,7 @@ func _physics_process(delta):
 			
 			if stamina <= 0:
 				state = REST
+				sfx_struggle.stop()
 		RESULT:
 			return
 	
@@ -186,9 +207,18 @@ func _physics_process(delta):
 		play_got_away_anim()
 		#SignalBus.minigame_completed.emit(true, fish)
 	elif distance >= 100:
+		Audio.fadeout(music)
+		$transition.visible = true
+		$AnimationPlayer.play('transition')
+		$sounds/sfx_splash.play(0.0)
+		
 		state = RESULT
 		flailTimer.stop()
 		struggleTimer.stop()
+		sfx_flail.stop()
+		sfx_struggle.stop()
+		
+		await get_tree().create_timer(1.5, true).timeout
 		SignalBus.minigame_completed.emit(true, fish)
 
 
@@ -241,6 +271,10 @@ func play_flip_anim(point_x, _scale, _duration := 0.3):
 
 
 func play_got_away_anim():
+	Audio.fadeout(music)
+	sfx_flail.stop()
+	sfx_struggle.stop()
+	
 	hook_sprite.self_modulate = Color(hook_sprite.self_modulate, 255)
 	hook_sprite.frame = 1
 	tween = get_tree().create_tween()

@@ -12,6 +12,8 @@ class_name SpawnZone
 @onready var tilemap: TileMapLayer = $SpawnLayer
 @onready var fishes: Node2D = $Fishes
 
+@onready var music: AudioStreamPlayer = $music
+
 @onready var SHADOW_TSCN: PackedScene = preload(
 	"res://scenes/entities/shadow/shadow.tscn"
 )
@@ -24,11 +26,17 @@ class_name SpawnZone
 func _ready():
 	tilemap.visible = false
 	SignalBus.hour_passed.connect(_on_hour_passed)
+	SignalBus.zone_entered.connect(_on_zone_entered)
 	
 	for fish in possible_fishes:
 		current_shadows[fish.id] = []
 	
 	spawn_fishes()
+
+
+func _on_zone_entered(_zone_name):
+	if zone_name == _zone_name:
+		Audio.switch(music.stream)
 
 
 func _on_hour_passed(_prev_hour):

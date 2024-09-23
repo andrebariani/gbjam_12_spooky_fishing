@@ -41,3 +41,5 @@ tile_map_data = PackedByteArray("AAAIAAEAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAE
 tile_set = SubResource("TileSet_e6mfu")
 
 [node name="Fishes" type="Node2D" parent="."]
+
+[node name="music" type="AudioStreamPlayer" parent="."]

@@ -19,6 +19,7 @@ config/icon="res://assets/test-sprite.png"
 
 WorldTime="*res://scenes/global/world_time.tscn"
 SignalBus="*res://scenes/global/signal_bus.gd"
+Audio="*res://scenes/global/audio.tscn"
 
 [display]
 

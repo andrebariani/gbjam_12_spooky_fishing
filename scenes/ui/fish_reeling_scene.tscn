@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://5pgojha1nxq3"]
+[gd_scene load_steps=15 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="2_0mtud"]
 [ext_resource type="Texture2D" uid="uid://qc0kpcf442gy" path="res://assets/hook.png" id="3_rqj2c"]
-[ext_resource type="Texture2D" uid="uid://d2qbovd44ysk1" path="res://assets/fish/jaca.png" id="4_si0xq"]
+[ext_resource type="Texture2D" uid="uid://dg5grjfo4kt6h" path="res://assets/fish/jaca.png" id="4_si0xq"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
+[ext_resource type="AudioStream" uid="uid://dqyscrsoqura3" path="res://assets/sounds/music/common_fish.mp3" id="7_rb3vj"]
+[ext_resource type="AudioStream" uid="uid://cfwcjvi8ekpt7" path="res://assets/sounds/effects/sfx_swim_struggle.mp3" id="8_f1lfl"]
+[ext_resource type="AudioStream" uid="uid://lrh2uiij866q" path="res://assets/sounds/effects/sfx_swim_flail.mp3" id="9_gof0j"]
+[ext_resource type="AudioStream" uid="uid://cnqcg0piq4bqr" path="res://assets/sounds/effects/sfx_splash.mp3" id="10_m3hdj"]
 
 [sub_resource type="Animation" id="Animation_t5kx1"]
 length = 0.001
@@ -32,6 +36,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("transition:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.145098, 0.12549, 0.298039, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_007l4"]
@@ -61,16 +77,41 @@ tracks/1/keys = {
 "values": [Vector2(-550, 5), Vector2(-500, 5)]
 }
 
+[sub_resource type="Animation" id="Animation_pxqx0"]
+resource_name = "transition"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.566667, 1.13333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(0.145098, 0.12549, 0.298039, 1), Color(0.278431, 0.466667, 0.568627, 1), Color(0.898039, 0.917647, 0.862745, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1iin2"]
 _data = {
 "RESET": SubResource("Animation_t5kx1"),
-"begin": SubResource("Animation_007l4")
+"begin": SubResource("Animation_007l4"),
+"transition": SubResource("Animation_pxqx0")
 }
 
 [node name="FishReelingScene" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_6doul")
 fish = ExtResource("2_0mtud")
+
+[node name="transition" type="ColorRect" parent="."]
+top_level = true
+offset_left = -70.0
+offset_top = -27.0
+offset_right = 216.0
+offset_bottom = 189.0
+color = Color(0.145098, 0.12549, 0.298039, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
@@ -85,6 +126,7 @@ hframes = 2
 position = Vector2(-79, 72)
 
 [node name="Fish" type="Sprite2D" parent="Hook/FishOffset"]
+position = Vector2(37, 0)
 texture = ExtResource("4_si0xq")
 hframes = 2
 
@@ -186,6 +228,22 @@ frame = 3
 libraries = {
 "": SubResource("AnimationLibrary_1iin2")
 }
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="music" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("7_rb3vj")
+
+[node name="sfx_struggle" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("8_f1lfl")
+volume_db = -10.0
+
+[node name="sfx_flail" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("9_gof0j")
+volume_db = -10.0
+
+[node name="sfx_splash" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("10_m3hdj")
 
 [connection signal="timeout" from="FlailTimer" to="." method="_on_flail_timer_timeout"]
 [connection signal="timeout" from="StruggleTimer" to="." method="_on_timer_timeout"]

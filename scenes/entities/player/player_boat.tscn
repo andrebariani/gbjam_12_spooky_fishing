@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://blk5upqrse004"]
+[gd_scene load_steps=17 format=3 uid="uid://blk5upqrse004"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player_boat.gd" id="1_0tnni"]
 [ext_resource type="Texture2D" uid="uid://c5bsj53gkqqqw" path="res://assets/boat.png" id="2_v6lwh"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/entities/player/states/fishing.gd" id="10_l23x7"]
 [ext_resource type="Script" path="res://scenes/entities/player/select_bait.gd" id="10_svh86"]
 [ext_resource type="PackedScene" uid="uid://cse3rppgle6dh" path="res://scenes/ui/game_menu.tscn" id="11_k266c"]
+[ext_resource type="AudioStream" uid="uid://b50nsoyfchrt0" path="res://assets/sounds/effects/sfx_boat.mp3" id="13_0rhgr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bi6u"]
 size = Vector2(8, 16)
@@ -107,6 +108,16 @@ offset_left = -80.0
 offset_top = -72.0
 offset_right = 80.0
 offset_bottom = 71.0
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="boat" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("13_0rhgr")
+volume_db = -18.0
+pitch_scale = 0.6
+
+[node name="cast" type="AudioStreamPlayer" parent="sounds"]
+volume_db = -5.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

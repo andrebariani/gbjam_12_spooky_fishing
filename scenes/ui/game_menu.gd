@@ -22,6 +22,7 @@ func _physics_process(_delta):
 
 func _on_zone_entered(zone_name):
 	if zone_name != regionLabel.text:
+		anim.stop()
 		regionLabel.text = zone_name
 		anim.play("region_change")
 

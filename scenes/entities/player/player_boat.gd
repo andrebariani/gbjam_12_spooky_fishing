@@ -6,6 +6,9 @@ class_name PlayerBoat
 @onready var sprite = $sprite
 @onready var arrow_sprite = $arrow
 
+@onready var sfx_boat: AudioStreamPlayer = $sounds/boat
+@onready var sfx_cast: AudioStreamPlayer = $sounds/cast
+
 @onready var TACKLE_TSCN = preload(
 	"res://scenes/entities/tackle/tackle.tscn"
 )
@@ -66,16 +69,15 @@ func _ready():
 func _process(_delta: float) -> void:
 	update_sprite()
 
-
+var run = true
 func _physics_process(delta):
-	update_inputs()
-	sm.run(delta)
-	move_and_slide()
-	
-	castLabel.text = str(cast_power)
-	posLabel.text = str("%.1f" % global_position.x, ", ",  "%.1f" % global_position.y)
+	if run:
+		update_inputs()
+		sm.run(delta)
+		move_and_slide()
 
 func _on_minigame_completed(_got_caught, _fish: FishData):
+	run = true
 	if _fish:
 		if _fish.mooch_bait != null:
 			# print_debug('got new bait!')
@@ -85,10 +87,11 @@ func _on_fish_bited():
 	remove_from_inventory()
 
 func _on_fish_hooked(_fish: FishData):
-	pass
+	run = false
 	# print_debug('Caught a ', _fish.name)
 
 func spawn_tackle(_dir := Vector2.ZERO):
+	sfx_cast.play(0.0)
 	var tackle: Tackle = TACKLE_TSCN.instantiate()
 	tackle_instance = tackle
 	tackle.init(self)

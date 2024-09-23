@@ -60,14 +60,17 @@ func _physics_process(delta):
 			if arc_axis <= 0:
 				collision.disabled = false
 				state = FLOAT
+				$sfx.play(0.0)
 		FLOAT:
 			var pressed = e.get_input(e.input_start, "pressed")
 			
 			if pressed:
 				is_moving = false
 				reel_speed = lerp(reel_speed, SPEED, ACCEL * delta)
+				$sfx_reel.play(0.0)
 			else:
 				is_moving = true
+				$sfx_reel.stop()
 				reel_speed = lerp(reel_speed, 0.0, (ACCEL*4) * delta)
 			
 			global_position += global_position.direction_to( \
@@ -84,6 +87,7 @@ func despawn():
 
 
 func bite(_fish: FishData):
+	$sfx_bite.play()
 	hooked = false
 	hooked_fish = _fish
 	state = BITE
