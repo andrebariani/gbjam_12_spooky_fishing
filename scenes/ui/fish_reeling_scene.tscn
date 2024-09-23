@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
-[ext_resource type="Texture2D" uid="uid://ryj8cumeb5bg" path="res://assets/fish.png" id="2_i7pv4"]
-[ext_resource type="Resource" uid="uid://hfrlgdhm8knk" path="res://scenes/entities/fish/Candiru.tres" id="2_uanna"]
+[ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="2_0mtud"]
 [ext_resource type="Texture2D" uid="uid://qc0kpcf442gy" path="res://assets/hook.png" id="3_rqj2c"]
+[ext_resource type="Texture2D" uid="uid://d2qbovd44ysk1" path="res://assets/fish/jaca.png" id="4_si0xq"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
@@ -70,7 +70,7 @@ _data = {
 [node name="FishReelingScene" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_6doul")
-fish = ExtResource("2_uanna")
+fish = ExtResource("2_0mtud")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
@@ -85,9 +85,8 @@ hframes = 2
 position = Vector2(-79, 72)
 
 [node name="Fish" type="Sprite2D" parent="Hook/FishOffset"]
-position = Vector2(127, 3)
-texture = ExtResource("2_i7pv4")
-region_rect = Rect2(6.82087, 70.6679, 85.6127, 49.3321)
+texture = ExtResource("4_si0xq")
+hframes = 2
 
 [node name="Debug" type="Control" parent="."]
 layout_mode = 3

@@ -24,7 +24,7 @@ func _on_fish_hooked(_fish: FishData):
 	playerCamera.enabled = false
 	
 
-func _on_minigame_completed(got_caught: bool = false, _fish: FishData = null):
+func _on_minigame_completed(_got_caught: bool = false, _fish: FishData = null):
 	#if got_caught:
 	#	print_debug('Caught a fish: ', _fish.name)
 	#else:

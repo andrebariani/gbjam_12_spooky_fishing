@@ -84,14 +84,15 @@ func reset():
 	distance = 50
 	line_tension = 0
 	
-#func _ready():
-	#bg.visible = self.visible
-	#state = WAIT
-	#start(fish)
+func _ready():
+	bg.visible = self.visible
+	state = WAIT
+	start(fish)
 
 var button_pressed = false
 var tug_just_pressed = false
 
+var sprite_frame_anim = 0
 func _physics_process(delta):
 	if state != WAIT:
 		update_inputs()
@@ -101,8 +102,17 @@ func _physics_process(delta):
 	
 	match state:
 		WAIT:
+			sprite_frame_anim += 1
+			if (sprite_frame_anim) % 20 == 0:
+				next_frame()
+				sprite_frame_anim = 1
 			pass
 		REST:
+			sprite_frame_anim += 1
+			if (sprite_frame_anim) % 30 == 0:
+				next_frame()
+				sprite_frame_anim = 1
+				
 			if button_pressed:
 				add_distance(distance_rate, delta)
 				add_line_tension(line_tension_rate * 0.4, delta)
@@ -123,6 +133,11 @@ func _physics_process(delta):
 					flailTimer.start(sec)
 					struggleTimer.start(sec + randf_range(0, 1))
 		FLAIL:
+			sprite_frame_anim += 1
+			if (sprite_frame_anim) % 20 == 0:
+				next_frame()
+				sprite_frame_anim = 1
+				
 			if button_pressed:
 				add_distance(distance_rate / 2.0, delta)
 				add_line_tension(line_tension_rate, delta)
@@ -135,6 +150,11 @@ func _physics_process(delta):
 			if stamina <= 0:
 				state = REST
 		STRUGGLE:
+			sprite_frame_anim += 1
+			if (sprite_frame_anim) % 5 == 0:
+				next_frame()
+				sprite_frame_anim = 1
+				
 			if button_pressed:
 				add_distance(-distance_rate / 5.0, delta)
 				add_line_tension(line_tension_rate * 4, delta)
@@ -192,13 +212,18 @@ func animate_body(_delta):
 		if sprite_flip:
 			sprite_flip = false
 			flip_fish()
-			
 
 func flip_fish():
 	if sprite_flip:
 		play_flip_anim(206, -1, 0.3)
 	else:
 		play_flip_anim(123, 1, 0.3)
+
+func next_frame():
+	if sprite.frame:
+		sprite.frame = 0
+	else:
+		sprite.frame = 1
 
 
 func play_flip_anim(point_x, _scale, _duration := 0.3):
