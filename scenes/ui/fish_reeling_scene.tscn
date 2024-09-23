@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5pgojha1nxq3"]
+[gd_scene load_steps=16 format=3 uid="uid://5pgojha1nxq3"]
 
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="2_0mtud"]
@@ -93,10 +93,27 @@ tracks/0/keys = {
 "values": [Color(0.145098, 0.12549, 0.298039, 1), Color(0.278431, 0.466667, 0.568627, 1), Color(0.898039, 0.917647, 0.862745, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_vr56o"]
+resource_name = "end"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transition:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.566667, 1.13333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(0.145098, 0.12549, 0.298039, 1), Color(0.278431, 0.466667, 0.568627, 1), Color(0.898039, 0.917647, 0.862745, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1iin2"]
 _data = {
 "RESET": SubResource("Animation_t5kx1"),
 "begin": SubResource("Animation_007l4"),
+"end": SubResource("Animation_vr56o"),
 "transition": SubResource("Animation_pxqx0")
 }
 

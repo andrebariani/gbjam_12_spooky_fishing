@@ -79,6 +79,7 @@ func _physics_process(delta):
 func _on_minigame_completed(_got_caught, _fish: FishData):
 	run = true
 	if _fish:
+		Audio.play_fanfare()
 		if _fish.mooch_bait != null:
 			# print_debug('got new bait!')
 			add_to_inventory(_fish.mooch_bait)
@@ -143,17 +144,19 @@ func change_bait(dirv_x):
 	menu.update_inventory()
 
 
+var run_input = true
 func update_inputs():
-	inputs.dirv = Input.get_vector("left", "right", "up", "down")
-	
-	for i_p in inputs.pressed:
-		inputs.pressed[i_p] = Input.is_action_pressed(i_p)
+	if run_input:
+		inputs.dirv = Input.get_vector("left", "right", "up", "down")
 		
-	for i_jp in inputs.just_pressed:
-		inputs.just_pressed[i_jp] = Input.is_action_just_pressed(i_jp)
-		
-	for i_jr in inputs.just_released:
-		inputs.just_released[i_jr] = Input.is_action_just_released(i_jr)
+		for i_p in inputs.pressed:
+			inputs.pressed[i_p] = Input.is_action_pressed(i_p)
+			
+		for i_jp in inputs.just_pressed:
+			inputs.just_pressed[i_jp] = Input.is_action_just_pressed(i_jp)
+			
+		for i_jr in inputs.just_released:
+			inputs.just_released[i_jr] = Input.is_action_just_released(i_jr)
 
 
 func get_input(input_name: String, state_name: String = 'just_pressed'):

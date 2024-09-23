@@ -18,9 +18,17 @@ func fadeout(stream: AudioStreamPlayer, duration: float = 3.0):
 	
 	await tween.finished
 	
+	stream.volume_db = 0
 	stream.stop()
+
+func play_fanfare():
+	world_music.volume_db = -40
+	$fanfare.play(0.0)
 	
-	
+	await get_tree().create_timer(3, true).timeout
+	world_music.volume_db = 0
+
+
 func switch(stream: AudioStreamMP3):
 	if world_music.playing:
 		if stream.resource_path != world_music.stream.resource_path:

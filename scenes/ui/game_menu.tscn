@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cse3rppgle6dh"]
+[gd_scene load_steps=11 format=3 uid="uid://cse3rppgle6dh"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_menu.gd" id="1_brl2b"]
+[ext_resource type="PackedScene" uid="uid://bw8d61cqye3lk" path="res://scenes/ui/fish_details.tscn" id="2_q1ufv"]
 [ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="2_x7r60"]
 [ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="3_vk0jd"]
 [ext_resource type="Texture2D" uid="uid://u37hbuckq26j" path="res://assets/bait.png" id="5_plb4u"]
@@ -174,6 +175,7 @@ layout_mode = 2
 offset_top = 124.0
 offset_right = 38.0
 offset_bottom = 146.0
+mouse_filter = 2
 theme_override_fonts/font = ExtResource("7_hmosj")
 theme_override_font_sizes/font_size = 8
 text = "x9"
@@ -205,6 +207,10 @@ theme_override_font_sizes/font_size = 8
 text = "01:23"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FishResult" parent="." instance=ExtResource("2_q1ufv")]
+visible = false
+layout_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

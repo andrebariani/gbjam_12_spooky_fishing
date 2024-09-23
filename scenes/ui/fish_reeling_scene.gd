@@ -60,14 +60,14 @@ var stamina_rate = 2
 
 
 func start(_fish):
+	self.visible = true
+	bg.visible = true
 	$transition.visible = true
 	$AnimationPlayer.play('transition')
 	$sounds/sfx_splash.play(0.0)
 	
 	await get_tree().create_timer(1.5, true).timeout
 	
-	self.visible = true
-	bg.visible = true
 	fish = _fish
 	max_stamina = fish.stamina
 	stamina = max_stamina
@@ -89,12 +89,22 @@ func start(_fish):
 	music.play(0.0)
 	
 func reset():
+	await get_tree().create_timer(1.5, true).timeout
+	
+	#$AnimationPlayer.play('RESET')
 	state = WAIT
 	self.visible = false
 	bg.visible = false
 	
+	flailTimer.stop()
+	struggleTimer.stop()
+	sfx_flail.stop()
+	sfx_struggle.stop()
+	
 	distance = 50
 	line_tension = 0
+	
+	SignalBus.minigame_completed.emit(true, fish)
 	
 #func _ready():
 	#bg.visible = self.visible
@@ -114,10 +124,6 @@ func _physics_process(delta):
 	
 	match state:
 		WAIT:
-			sprite_frame_anim += 1
-			if (sprite_frame_anim) % 20 == 0:
-				next_frame()
-				sprite_frame_anim = 1
 			pass
 		REST:
 			sprite_frame_anim += 1
@@ -200,26 +206,19 @@ func _physics_process(delta):
 	
 	animate_body(delta)
 	
-	if line_tension >= 100 or distance <= 0:
-		state = RESULT
-		flailTimer.stop()
-		struggleTimer.stop()
-		play_got_away_anim()
-		#SignalBus.minigame_completed.emit(true, fish)
-	elif distance >= 100:
-		Audio.fadeout(music)
-		$transition.visible = true
-		$AnimationPlayer.play('transition')
-		$sounds/sfx_splash.play(0.0)
-		
-		state = RESULT
-		flailTimer.stop()
-		struggleTimer.stop()
-		sfx_flail.stop()
-		sfx_struggle.stop()
-		
-		await get_tree().create_timer(1.5, true).timeout
-		SignalBus.minigame_completed.emit(true, fish)
+	if state != WAIT or state != RESULT:
+		if line_tension >= 100 or distance <= 0:
+			state = RESULT
+			play_got_away_anim()
+		elif distance >= 100:
+			Audio.fadeout(music)
+			$transition.visible = true
+			$AnimationPlayer.play('end')
+			$sounds/sfx_splash.play(0.0)
+			
+			state = RESULT
+			
+			reset()
 
 
 var sprite_flip = false
@@ -293,6 +292,8 @@ func play_got_away_anim():
 	SignalBus.minigame_completed.emit(false, null)
 	state = WAIT
 	hook_sprite.frame = 0
+	distance = 50
+	line_tension = 0
 
 
 func _on_timer_timeout():
@@ -336,4 +337,7 @@ func get_input(input_name: String, state_name: String = 'just_pressed'):
 
 
 func _on_animation_player_animation_finished(_anim_name):
-	state = REST
+	print_debug(_anim_name)
+	match _anim_name:
+		'begin':
+			state = REST
