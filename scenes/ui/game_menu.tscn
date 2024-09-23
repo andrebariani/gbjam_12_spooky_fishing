@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://u37hbuckq26j" path="res://assets/bait.png" id="5_plb4u"]
 [ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="5_w2skk"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="7_hmosj"]
-[ext_resource type="Theme" uid="uid://bvvyqt4hg2j5s" path="res://scenes/ui/deafult_theme.tres" id="8_enl4r"]
+[ext_resource type="Theme" uid="uid://5g30rxyaj341" path="res://scenes/ui/deafult_theme.tres" id="8_enl4r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf2ft"]
 content_margin_bottom = 3.0
