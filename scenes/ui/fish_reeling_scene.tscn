@@ -77,8 +77,8 @@ tracks/1/keys = {
 "values": [Vector2(-550, 5), Vector2(-500, 5)]
 }
 
-[sub_resource type="Animation" id="Animation_pxqx0"]
-resource_name = "transition"
+[sub_resource type="Animation" id="Animation_vr56o"]
+resource_name = "end"
 length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -93,8 +93,8 @@ tracks/0/keys = {
 "values": [Color(0.145098, 0.12549, 0.298039, 1), Color(0.278431, 0.466667, 0.568627, 1), Color(0.898039, 0.917647, 0.862745, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_vr56o"]
-resource_name = "end"
+[sub_resource type="Animation" id="Animation_pxqx0"]
+resource_name = "transition"
 length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -148,6 +148,7 @@ texture = ExtResource("4_si0xq")
 hframes = 2
 
 [node name="Debug" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

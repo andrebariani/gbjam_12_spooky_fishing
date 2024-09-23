@@ -27,7 +27,7 @@ var gallery_open = false
 func _physics_process(_delta):
 	timerLabel.text = "%02d:%02d" % [WorldTime.hours, WorldTime.minutes]
 	
-	start = Input.is_action_just_released('select')
+	start = Input.is_action_just_released('start')
 	
 	if start:
 		show_gallery()

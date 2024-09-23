@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://dnychxls0ov2c"]
+[gd_resource type="Resource" script_class="FishData" load_steps=4 format=3 uid="uid://dnychxls0ov2c"]
 
 [ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_6ogot"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_nl5b8"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="2_lljai"]
 
 [resource]
 script = ExtResource("1_nl5b8")
 id = &"redrum"
 name = "Redrum Bass"
+icon = ExtResource("2_lljai")
 description = "A fish completely covered in red, believed to be a bad omen."
 bait = ExtResource("1_6ogot")
 stamina = 0.0
