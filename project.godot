@@ -87,6 +87,7 @@ select={
 2d_physics/layer_2="Bait"
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Fish"
+2d_physics/layer_5="Zone"
 
 [rendering]
 

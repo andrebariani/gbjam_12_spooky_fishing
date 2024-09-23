@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="FishData" load_steps=5 format=3 uid="uid://dqvg82tmdvvr3"]
+[gd_resource type="Resource" script_class="FishData" load_steps=4 format=3 uid="uid://dqvg82tmdvvr3"]
 
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="1_4e5v4"]
 [ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_ahw2q"]
-[ext_resource type="Resource" uid="uid://jg34i20bsud7" path="res://scenes/items/Piramboia.tres" id="2_e4xa6"]
 [ext_resource type="Texture2D" uid="uid://uxjkd1thsbg0" path="res://assets/test-sprite.png" id="3_lu1k4"]
 
 [resource]
@@ -13,7 +12,6 @@ sprite = ExtResource("3_lu1k4")
 description = "A snake-like fish with a nasty bite."
 bait = ExtResource("1_ahw2q")
 stamina = 0.0
-mooch_bait = ExtResource("2_e4xa6")
 behavior = "Static"
 size_centimeters = 12.0
 is_fixed_attempts = false
