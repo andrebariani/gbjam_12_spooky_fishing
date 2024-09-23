@@ -4,7 +4,7 @@ class_name FishData
 @export_group("Base")
 @export var id: StringName
 @export var name: String
-@export var icon: CompressedTexture2D
+@export var icon: CompressedTexture2D = preload("res://assets/fish_icon.png")
 @export var sprite: CompressedTexture2D
 @export var galery_photo: CompressedTexture2D
 @export_multiline var description: String
