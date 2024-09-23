@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ui/fish_reeling_scene.gd" id="1_6doul"]
 [ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="2_0mtud"]
 [ext_resource type="Texture2D" uid="uid://qc0kpcf442gy" path="res://assets/hook.png" id="3_rqj2c"]
-[ext_resource type="Texture2D" uid="uid://d2qbovd44ysk1" path="res://assets/fish/jaca.png" id="4_si0xq"]
+[ext_resource type="Texture2D" uid="uid://dg5grjfo4kt6h" path="res://assets/fish/jaca.png" id="4_si0xq"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="4_ylwgf"]
 [ext_resource type="Texture2D" uid="uid://dh1ytfrnfkg7i" path="res://assets/wave_1.png" id="5_vnr08"]
 
