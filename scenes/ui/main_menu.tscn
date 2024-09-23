@@ -1,9 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6fgxvt2hkjl1"]
+[gd_scene load_steps=12 format=3 uid="uid://b6fgxvt2hkjl1"]
 
-[ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="1_c6b2g"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_i55ut"]
-[ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="2_w3gf1"]
-[ext_resource type="Theme" uid="uid://5g30rxyaj341" path="res://scenes/ui/deafult_theme.tres" id="3_8dc0f"]
+[ext_resource type="Texture2D" uid="uid://biq2n03lj2mnf" path="res://assets/title.png" id="2_v0xp5"]
 [ext_resource type="Texture2D" uid="uid://d2o6sr0541rx0" path="res://assets/button_up.png" id="3_k2uwq"]
 [ext_resource type="Texture2D" uid="uid://b41ubi3p8d5wa" path="res://assets/button_down.png" id="4_o7g3w"]
 
@@ -55,48 +53,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i55ut")
 
-[node name="Background" type="NinePatchRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_c6b2g")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
+texture = ExtResource("2_v0xp5")
 
-[node name="HFlowContainer" type="VFlowContainer" parent="Background"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -57.0
-offset_right = 57.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/v_separation = 50
-alignment = 1
-last_wrap_alignment = 2
-
-[node name="Label" type="Label" parent="Background/HFlowContainer"]
+[node name="Button" type="Button" parent="Background"]
 layout_mode = 2
-theme = ExtResource("3_8dc0f")
-theme_override_colors/font_color = Color(0.898039, 0.917647, 0.862745, 1)
-theme_override_fonts/font = ExtResource("2_w3gf1")
-theme_override_font_sizes/font_size = 16
-text = "LE FISHE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Background/HFlowContainer"]
-layout_mode = 2
+offset_left = 56.0
+offset_top = 114.0
+offset_right = 103.0
+offset_bottom = 133.0
 theme = SubResource("Theme_l3ygx")
 theme_override_font_sizes/font_size = 8
 shortcut = SubResource("Shortcut_tcinn")
-text = "Play"
+text = "Start"
 
-[connection signal="pressed" from="Background/HFlowContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Background/Button" to="." method="_on_button_pressed"]
