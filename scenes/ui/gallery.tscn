@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwhhig6vleiof"]
+[gd_scene load_steps=8 format=3 uid="uid://cwhhig6vleiof"]
 
 [ext_resource type="Script" path="res://scenes/ui/gallery.gd" id="1_n016w"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="2_jfm80"]
@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="3_80uf5"]
 [ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="3_eye13"]
 [ext_resource type="Resource" uid="uid://c2qvl1oea71dt" path="res://scenes/entities/fish/ZombieWrasse.tres" id="4_3cx24"]
-[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="4_7bqm2"]
 [ext_resource type="PackedScene" uid="uid://bw8d61cqye3lk" path="res://scenes/ui/fish_details.tscn" id="5_nxdvq"]
 
 [node name="Gallery" type="Control"]
@@ -17,7 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n016w")
-fishes = Array[ExtResource("2_jfm80")]([ExtResource("3_eye13"), ExtResource("4_3cx24"), null, null, null, null, null, null, null, null, null])
+fishes = Array[ExtResource("2_jfm80")]([ExtResource("3_eye13"), ExtResource("4_3cx24")])
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -36,7 +35,7 @@ patch_margin_bottom = 10
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 17.0
+offset_bottom = 22.0
 grow_horizontal = 2
 alignment = 1
 
@@ -73,91 +72,11 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_bottom = NodePath("Button1")
-focus_next = NodePath("Button1")
 focus_mode = 2
-
-[node name="Button1" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button2" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????
-"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button3" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button4" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button5" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button6" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button7" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button8" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button9" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button10" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
-
-[node name="Button11" type="Button" parent="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList"]
-layout_mode = 2
-disabled = true
-text = "?????"
-icon = ExtResource("4_7bqm2")
 
 [node name="FishDetails" parent="." instance=ExtResource("5_nxdvq")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button1" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button2" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button3" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button4" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button5" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button6" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button7" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button8" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button9" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button10" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Background/ScrollContainer/MarginContainer/VBoxContainer/FishList/Button11" to="." method="_on_button_pressed"]
 [connection signal="hidden" from="FishDetails" to="." method="_on_fish_details_hidden"]
