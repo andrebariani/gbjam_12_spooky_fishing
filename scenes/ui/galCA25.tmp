@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwhhig6vleiof"]
+
+[ext_resource type="Script" path="res://scenes/ui/gallery.gd" id="1_n016w"]
+[ext_resource type="Texture2D" uid="uid://dyfiyehobeul1" path="res://assets/ui-border.png" id="2_qsh7p"]
+[ext_resource type="FontFile" uid="uid://cfdua1dcq34bg" path="res://assets/dogicapixelbold.otf" id="3_80uf5"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="4_7bqm2"]
+
+[node name="Gallery" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n016w")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qsh7p")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Galery" type="Label" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_80uf5")
+theme_override_font_sizes/font_size = 8
+text = "Galery"
+vertical_alignment = 1
+
+[node name="FishList" type="GridContainer" parent="Background/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("Button1")
+focus_next = NodePath("Button1")
+focus_mode = 2
+
+[node name="Button1" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Button2")
+text = "????"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button2" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "?????"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button3" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button4" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button5" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button6" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button7" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button8" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button9" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[node name="Button10" type="Button" parent="Background/MarginContainer/VBoxContainer/FishList"]
+visible = false
+layout_mode = 2
+text = "Piramboia"
+icon = ExtResource("4_7bqm2")
+
+[connection signal="focus_entered" from="Background/MarginContainer/VBoxContainer/FishList/Button1" to="." method="_on_button_focus_entered"]

@@ -6,6 +6,7 @@ class_name FishData
 @export var name: String
 @export var icon: CompressedTexture2D
 @export var sprite: CompressedTexture2D
+@export var galery_photo: CompressedTexture2D
 @export_multiline var description: String
 @export var bait: BaitData = preload("res://scenes/items/maggot.tres")
 @export var stamina: float = 0

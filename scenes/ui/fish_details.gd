@@ -9,3 +9,21 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func set_title(title: String) -> void:
+	%Title.text = title
+
+
+func set_fish_data(fish_data: FishData) -> void:
+	%Title.text = fish_data.name
+	%Description.text = fish_data.description
+	%Photo.texture = fish_data.galery_photo
+
+
+func _on_close_pressed() -> void:
+	self.hide()
+
+
+func _on_close_draw() -> void:
+	%Close.grab_focus()

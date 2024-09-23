@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="FishData" load_steps=4 format=3 uid="uid://cg4s1at8py71d"]
+[gd_resource type="Resource" script_class="FishData" load_steps=5 format=3 uid="uid://cg4s1at8py71d"]
 
 [ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_514wp"]
+[ext_resource type="Texture2D" uid="uid://g154dajfnx6g" path="res://assets/fish/jaca_p.png" id="2_5pv6u"]
 [ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="2_fxn2k"]
-[ext_resource type="Texture2D" uid="uid://d2qbovd44ysk1" path="res://assets/fish/jaca.png" id="3_y2hv5"]
+[ext_resource type="Texture2D" uid="uid://dg5grjfo4kt6h" path="res://assets/fish/jaca.png" id="3_y2hv5"]
 
 [resource]
 script = ExtResource("2_fxn2k")
 id = &"jaca"
 name = "Jaca"
 sprite = ExtResource("3_y2hv5")
+galery_photo = ExtResource("2_5pv6u")
 description = "Agro Pesca Jacaré"
 bait = ExtResource("1_514wp")
 stamina = 100.0
