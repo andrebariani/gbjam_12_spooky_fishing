@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://bym48g7im6vh2"]
+
+[ext_resource type="Texture2D" uid="uid://cd1di6x2la20m" path="res://assets/baits/sashimi-5.png" id="1_xc2fb"]
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="2_bs35a"]
+
+[resource]
+script = ExtResource("2_bs35a")
+id = &"clownbait"
+name = "Clown"
+icon = ExtResource("1_xc2fb")
+description = ""

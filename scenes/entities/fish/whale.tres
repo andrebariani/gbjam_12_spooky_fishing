@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=6 format=3 uid="uid://wqm88qko7upf"]
+
+[ext_resource type="Texture2D" uid="uid://w5hyx63etqpt" path="res://assets/fish/eomelhorehquandovamosprabaleia_p.png" id="2_tt1qe"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="3_ody62"]
+[ext_resource type="Resource" uid="uid://dgja1tb8yfgad" path="res://scenes/items/sharkBait.tres" id="4_6vvrp"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="4_esg3s"]
+[ext_resource type="Texture2D" uid="uid://d1hkapl4p4ftt" path="res://assets/fish/eomelhorehquandovamosprabaleia.png" id="5_15t4s"]
+
+[resource]
+script = ExtResource("4_esg3s")
+id = &"whale"
+name = "Gram"
+icon = ExtResource("3_ody62")
+sprite = ExtResource("5_15t4s")
+galery_photo = ExtResource("2_tt1qe")
+description = "No boat is big enough for it."
+bait = ExtResource("4_6vvrp")
+stamina = 130.0
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 5
+min_interval = 1.0
+max_interval = 3.0
+hook_window = 2.0
+shadow_size = 4
+rarity = 3
+weather = 0
+is_timed_only = false
+start_time_window = 0
+end_time_window = 0

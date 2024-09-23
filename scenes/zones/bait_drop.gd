@@ -5,6 +5,7 @@ class_name BaitDrop
 
 func init(_bait: BaitData):
 	bait = _bait
+	$"Test-sprite".texture = bait.icon
 
 func _on_body_entered(body):
 	if body is PlayerBoat:

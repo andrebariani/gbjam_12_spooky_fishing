@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://dgja1tb8yfgad"]
+
+[ext_resource type="Texture2D" uid="uid://cd1di6x2la20m" path="res://assets/baits/sashimi-5.png" id="1_y3dns"]
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="2_lj8sg"]
+
+[resource]
+script = ExtResource("2_lj8sg")
+id = &"sharkbait"
+name = "Shark"
+icon = ExtResource("1_y3dns")
+description = ""

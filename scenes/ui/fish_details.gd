@@ -27,7 +27,8 @@ func set_fish_data(fish_data: FishData) -> void:
 
 func _on_close_pressed() -> void:
 	self.hide()
-	entity.closed_menu()
+	if entity:
+		entity.closed_menu()
 
 
 func _on_close_draw() -> void:

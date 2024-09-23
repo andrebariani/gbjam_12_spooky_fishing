@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=6 format=3 uid="uid://dy30lvcc054xd"]
+
+[ext_resource type="Resource" uid="uid://dsq7w47c4m61i" path="res://scenes/items/beetle.tres" id="1_d0qp3"]
+[ext_resource type="Texture2D" uid="uid://cxlwf5r4tg63u" path="res://assets/fish/mummy_p.png" id="2_5wm7r"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="3_hnhru"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="4_g372c"]
+[ext_resource type="Texture2D" uid="uid://d1gkt54am6gnp" path="res://assets/fish/mummy.png" id="5_lw0ow"]
+
+[resource]
+script = ExtResource("4_g372c")
+id = &"mummy"
+name = "Mummy"
+icon = ExtResource("3_hnhru")
+sprite = ExtResource("5_lw0ow")
+galery_photo = ExtResource("2_5wm7r")
+description = "Watch out for its curse."
+bait = ExtResource("1_d0qp3")
+stamina = 0.0
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 5
+min_interval = 0.3
+max_interval = 0.6
+hook_window = 2.5
+shadow_size = 2
+rarity = 1
+weather = 0
+is_timed_only = false
+start_time_window = 0
+end_time_window = 0

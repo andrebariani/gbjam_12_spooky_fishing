@@ -23,7 +23,8 @@ var tackle_instance = null
 @export var input_start := 'A'
 @export var input_cancel := 'B'
 @export var input_select := 'select'
-@export var selected_bait := preload("res://scenes/items/maggot.tres")
+@export var input_button_start := 'start'
+@export var selected_bait := preload("res://scenes/items/beetle.tres")
 var is_selecting_bait = true
 
 const SPEED = 50.0
@@ -54,7 +55,7 @@ var inputs = {
 
 
 var inventory = [
-	{"data": preload("res://scenes/items/maggot.tres"), "units": 3}
+	{"data": preload("res://scenes/items/beetle.tres"), "units": 3}
 ]
 
 func _ready():

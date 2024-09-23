@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://dvnjmax1qdd28"]
+
+[ext_resource type="Texture2D" uid="uid://c01se67x5j65x" path="res://assets/baits/sushi-3.png" id="1_gbb13"]
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="2_oee1i"]
+
+[resource]
+script = ExtResource("2_oee1i")
+id = &"roe"
+name = "Roe"
+icon = ExtResource("1_gbb13")
+description = ""

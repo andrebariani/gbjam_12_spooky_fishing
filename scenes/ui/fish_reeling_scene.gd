@@ -337,7 +337,6 @@ func get_input(input_name: String, state_name: String = 'just_pressed'):
 
 
 func _on_animation_player_animation_finished(_anim_name):
-	print_debug(_anim_name)
 	match _anim_name:
 		'begin':
 			state = REST

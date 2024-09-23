@@ -5,8 +5,7 @@ extends Control
 func _ready() -> void:
 	SignalBus.minigame_completed.connect(add_fish_to_list)
 	setup_buttons()
-	show_galery()
-	_on_button_pressed_test()
+	#_on_button_pressed_test()
 
 
 func add_fish_to_list(should_add: bool, fish_data: FishData) -> void:

@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=7 format=3 uid="uid://d4cor8va0nmhp"]
+
+[ext_resource type="Resource" uid="uid://do6402ag5uvm5" path="res://scenes/items/maggot.tres" id="1_kwkns"]
+[ext_resource type="Texture2D" uid="uid://bivtc1ebmceas" path="res://assets/fish/eye_p.png" id="2_21ooj"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="3_e8go0"]
+[ext_resource type="Resource" uid="uid://c13dfw8xu3bt8" path="res://scenes/items/eyeBait.tres" id="4_pm4r5"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="5_bnsnd"]
+[ext_resource type="Texture2D" uid="uid://bpj18qdvo3k1s" path="res://assets/fish/eye.png" id="6_p1vnr"]
+
+[resource]
+script = ExtResource("5_bnsnd")
+id = &"eye"
+name = "Evil Eye"
+icon = ExtResource("3_e8go0")
+sprite = ExtResource("6_p1vnr")
+galery_photo = ExtResource("2_21ooj")
+description = "It see things better left unseen."
+bait = ExtResource("1_kwkns")
+stamina = 100.0
+mooch_bait = ExtResource("4_pm4r5")
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 3
+min_interval = 0.3
+max_interval = 1.0
+hook_window = 1.5
+shadow_size = 0
+rarity = 2
+weather = 0
+is_timed_only = false
+start_time_window = 0
+end_time_window = 0

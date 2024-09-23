@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=6 format=3 uid="uid://b8enffocpvtim"]
+
+[ext_resource type="Resource" uid="uid://c13dfw8xu3bt8" path="res://scenes/items/eyeBait.tres" id="1_ycnfd"]
+[ext_resource type="Texture2D" uid="uid://dsc3bw7warae4" path="res://assets/fish/invisible_p.png" id="2_ixq5r"]
+[ext_resource type="Texture2D" uid="uid://bt6gfcrm1ujy0" path="res://assets/fish_icon.png" id="3_docwx"]
+[ext_resource type="Texture2D" uid="uid://jv2v3tgo05oh" path="res://assets/fish/invisible.png" id="5_igevp"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="5_x10jq"]
+
+[resource]
+script = ExtResource("5_x10jq")
+id = &"invisible"
+name = "Invisible"
+icon = ExtResource("3_docwx")
+sprite = ExtResource("5_igevp")
+galery_photo = ExtResource("2_ixq5r")
+description = "Don't go putting it in an aquarium."
+bait = ExtResource("1_ycnfd")
+stamina = 120.0
+behavior = "Static"
+size_centimeters = 12.0
+is_fixed_attempts = false
+max_attempts = 2
+min_interval = 0.1
+max_interval = 5.0
+hook_window = 0.5
+shadow_size = 1
+rarity = 3
+weather = 0
+is_timed_only = false
+start_time_window = 1
+end_time_window = 9

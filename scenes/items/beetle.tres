@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="BaitData" load_steps=2 format=3 uid="uid://dsq7w47c4m61i"]
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://dsq7w47c4m61i"]
 
+[ext_resource type="Texture2D" uid="uid://dibk7bh1bf78v" path="res://assets/baits/sushi-2.png" id="1_nnahf"]
 [ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="1_r0wr5"]
 
 [resource]
 script = ExtResource("1_r0wr5")
 id = &"beetle"
 name = "Beetle"
+icon = ExtResource("1_nnahf")
 description = ""

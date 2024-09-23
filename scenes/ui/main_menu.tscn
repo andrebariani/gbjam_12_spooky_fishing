@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6fgxvt2hkjl1"]
+[gd_scene load_steps=11 format=3 uid="uid://b6fgxvt2hkjl1"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_i55ut"]
 [ext_resource type="Texture2D" uid="uid://biq2n03lj2mnf" path="res://assets/title.png" id="2_v0xp5"]
+[ext_resource type="AudioStream" uid="uid://bb2gc58dhnrr3" path="res://assets/sounds/music/title.mp3" id="3_0a7yh"]
+[ext_resource type="AudioStream" uid="uid://1wtvegnn4bwx" path="res://assets/sounds/effects/sfx_start.mp3" id="4_mlgys"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_ypb7u"]
 keycode = 4194309
@@ -13,6 +15,68 @@ unicode = 122
 
 [sub_resource type="Shortcut" id="Shortcut_tcinn"]
 events = [SubResource("InputEventKey_ypb7u"), SubResource("InputEventKey_iyc5n")]
+
+[sub_resource type="Animation" id="Animation_115hu"]
+resource_name = "start"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Button:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_v2os2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Button:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ul15q"]
+_data = {
+"RESET": SubResource("Animation_v2os2"),
+"start": SubResource("Animation_115hu")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -42,4 +106,17 @@ theme_override_font_sizes/font_size = 8
 shortcut = SubResource("Shortcut_tcinn")
 text = "Start"
 
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0a7yh")
+autoplay = true
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mlgys")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ul15q")
+}
+
 [connection signal="pressed" from="Background/Button" to="." method="_on_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

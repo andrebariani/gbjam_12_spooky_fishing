@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://b71o6ykv6cwum"]
+
+[ext_resource type="Texture2D" uid="uid://ckihgls8ofx1v" path="res://assets/baits/another_bait3.png" id="1_80463"]
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="2_ybivm"]
+
+[resource]
+script = ExtResource("2_ybivm")
+id = &"prawn"
+name = "Prawn"
+icon = ExtResource("1_80463")
+description = ""

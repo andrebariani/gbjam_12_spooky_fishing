@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cse3rppgle6dh"]
+[gd_scene load_steps=24 format=3 uid="uid://cse3rppgle6dh"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_menu.gd" id="1_brl2b"]
 [ext_resource type="PackedScene" uid="uid://bw8d61cqye3lk" path="res://scenes/ui/fish_details.tscn" id="2_q1ufv"]
@@ -7,6 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://u37hbuckq26j" path="res://assets/bait.png" id="5_plb4u"]
 [ext_resource type="FontFile" uid="uid://oev3rdf5s6wf" path="res://assets/dogicapixel.otf" id="7_hmosj"]
 [ext_resource type="Theme" uid="uid://5g30rxyaj341" path="res://scenes/ui/deafult_theme.tres" id="8_enl4r"]
+[ext_resource type="PackedScene" uid="uid://cwhhig6vleiof" path="res://scenes/ui/gallery.tscn" id="8_wgnh6"]
+[ext_resource type="Script" path="res://scenes/entities/fish/fish_data.gd" id="9_fd7od"]
+[ext_resource type="Resource" uid="uid://dishrur4t0g7y" path="res://scenes/entities/fish/Blob.tres" id="10_3h7n6"]
+[ext_resource type="Resource" uid="uid://cor00lr6ki00m" path="res://scenes/entities/fish/lantern.tres" id="11_5c1et"]
+[ext_resource type="Resource" uid="uid://c5n0o04oq4p35" path="res://scenes/entities/fish/Clown.tres" id="11_ilsn1"]
+[ext_resource type="Resource" uid="uid://d4cor8va0nmhp" path="res://scenes/entities/fish/Eye.tres" id="12_7n1s7"]
+[ext_resource type="Resource" uid="uid://c4evmutjldcjc" path="res://scenes/entities/fish/Fishstein.tres" id="13_vjxaq"]
+[ext_resource type="Resource" uid="uid://b8enffocpvtim" path="res://scenes/entities/fish/Invisible.tres" id="14_6v1jk"]
+[ext_resource type="Resource" uid="uid://cg4s1at8py71d" path="res://scenes/entities/fish/Jaca.tres" id="15_5bvxp"]
+[ext_resource type="Resource" uid="uid://dy30lvcc054xd" path="res://scenes/entities/fish/Mummy.tres" id="16_o1hfb"]
+[ext_resource type="Resource" uid="uid://bts3u0vfq5bhl" path="res://scenes/entities/fish/Osteochthys.tres" id="17_jyc01"]
+[ext_resource type="Resource" uid="uid://cxri0iuc7vtn8" path="res://scenes/entities/fish/Shark.tres" id="18_2v7hn"]
+[ext_resource type="Resource" uid="uid://wqm88qko7upf" path="res://scenes/entities/fish/whale.tres" id="19_j65vo"]
 
 [sub_resource type="Animation" id="Animation_8op0j"]
 length = 0.001
@@ -211,6 +224,11 @@ vertical_alignment = 1
 [node name="FishResult" parent="." instance=ExtResource("2_q1ufv")]
 visible = false
 layout_mode = 1
+
+[node name="Gallery" parent="." instance=ExtResource("8_wgnh6")]
+visible = false
+layout_mode = 1
+fishes = Array[ExtResource("9_fd7od")]([ExtResource("13_vjxaq"), ExtResource("11_5c1et"), ExtResource("16_o1hfb"), ExtResource("15_5bvxp"), ExtResource("17_jyc01"), ExtResource("12_7n1s7"), ExtResource("14_6v1jk"), ExtResource("10_3h7n6"), ExtResource("11_ilsn1"), ExtResource("18_2v7hn"), ExtResource("19_j65vo")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

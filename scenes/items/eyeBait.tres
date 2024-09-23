@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaitData" load_steps=3 format=3 uid="uid://c13dfw8xu3bt8"]
+
+[ext_resource type="Texture2D" uid="uid://di187uj06fxoj" path="res://assets/baits/another_bait1.png" id="1_ubhq8"]
+[ext_resource type="Script" path="res://scenes/items/bait_data.gd" id="2_4qtgj"]
+
+[resource]
+script = ExtResource("2_4qtgj")
+id = &"eyebait"
+name = "Eye"
+icon = ExtResource("1_ubhq8")
+description = ""
